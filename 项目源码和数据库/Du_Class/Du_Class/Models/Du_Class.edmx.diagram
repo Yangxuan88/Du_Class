@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0fd400c005a486fb5ac62ce1296ac23" Name="Diagram1">
+        <EntityTypeShape EntityType="Du_ClassModel.Class" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.Course" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.CourseManage" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.Grade" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.News" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.Student" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Du_ClassModel.Teacher" Width="1.5" PointX="0.625" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="Du_ClassModel.FK_CourseManage_Class1" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_Student_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_CourseManage_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_Grade_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_CourseManage_Student1" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_CourseManage_Teacher1" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_News_Teacher" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

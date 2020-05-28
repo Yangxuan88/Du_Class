@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Du_ClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Class_ID" />
+    </Key>
+    <Property Name="Class_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Major" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tea_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClassRoom" Type="nvarchar" MaxLength="50" />
+    <Property Name="SchoolTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CourseManage">
+    <Key>
+      <PropertyRef Name="CurriculumID" />
+    </Key>
+    <Property Name="CurriculumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="Class_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="Stu_Number" />
+    </Key>
+    <Property Name="Stu_Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stu_Score" Type="decimal" Precision="4" Scale="1" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="News_content" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Publish_time" Type="datetime" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Stu_Namber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stu_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stu_Sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stu_Photo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Stu_Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDCard" Type="nvarchar" MaxLength="20" />
+    <Property Name="Nation" Type="nvarchar" MaxLength="50" />
+    <Property Name="NativePlace" Type="nvarchar" MaxLength="50" />
+    <Property Name="PoliticsStatus" Type="nvarchar" MaxLength="20" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+    <Property Name="EnrollmentYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="SchoolRoll" Type="nvarchar" MaxLength="20" />
+    <Property Name="Class_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="TeacherPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="TeacherPhone" Type="nvarchar" MaxLength="11" />
+    <Property Name="Tea_Sex" Type="char" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_CourseManage_Class1">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="CourseManage" Type="Self.CourseManage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_ID" />
+      </Principal>
+      <Dependent Role="CourseManage">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseManage_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseManage" Type="Self.CourseManage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseManage">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseManage_Student1">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="CourseManage" Type="Self.CourseManage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="CourseManage">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseManage_Teacher1">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="CourseManage" Type="Self.CourseManage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="CourseManage">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Du_ClassModelStoreContainer">
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseManage" EntityType="Self.CourseManage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CourseManage_Class1" Association="Self.FK_CourseManage_Class1">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="CourseManage" EntitySet="CourseManage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseManage_Course" Association="Self.FK_CourseManage_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseManage" EntitySet="CourseManage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseManage_Student1" Association="Self.FK_CourseManage_Student1">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="CourseManage" EntitySet="CourseManage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseManage_Teacher1" Association="Self.FK_CourseManage_Teacher1">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="CourseManage" EntitySet="CourseManage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_Course" Association="Self.FK_Grade_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Teacher" Association="Self.FK_News_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
