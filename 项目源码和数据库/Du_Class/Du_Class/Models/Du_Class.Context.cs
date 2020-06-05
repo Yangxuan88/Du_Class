@@ -13,10 +13,10 @@ namespace Du_Class.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Du_ClassEntities : DbContext
+    public partial class Du_ClassEntities1 : DbContext
     {
-        public Du_ClassEntities()
-            : base("name=Du_ClassEntities")
+        public Du_ClassEntities1()
+            : base("name=Du_ClassEntities1")
         {
         }
     
@@ -27,7 +27,6 @@ namespace Du_Class.Models
     
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<Course> Course { get; set; }
-        public virtual DbSet<CourseManage> CourseManage { get; set; }
         public virtual DbSet<Grade> Grade { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Student> Student { get; set; }

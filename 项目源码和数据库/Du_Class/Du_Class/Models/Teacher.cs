@@ -17,7 +17,8 @@ namespace Du_Class.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
-            this.CourseManage = new HashSet<CourseManage>();
+            this.Class = new HashSet<Class>();
+            this.Course = new HashSet<Course>();
             this.News = new HashSet<News>();
         }
     
@@ -28,7 +29,9 @@ namespace Du_Class.Models
         public string Tea_Sex { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseManage> CourseManage { get; set; }
+        public virtual ICollection<Class> Class { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Course> Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
     }

@@ -14,8 +14,8 @@ namespace Du_Class.Models
     
     public partial class Grade
     {
-        public string Stu_Number { get; set; }
-        public Nullable<decimal> Stu_Score { get; set; }
+        public int GradeID { get; set; }
+        public Nullable<double> Stu_Score { get; set; }
         public int CourseID { get; set; }
     
         public virtual Course Course { get; set; }

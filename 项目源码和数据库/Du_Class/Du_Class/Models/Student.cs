@@ -14,12 +14,6 @@ namespace Du_Class.Models
     
     public partial class Student
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
-        {
-            this.CourseManage = new HashSet<CourseManage>();
-        }
-    
         public int StudentID { get; set; }
         public string Stu_Namber { get; set; }
         public string Stu_Name { get; set; }
@@ -34,9 +28,9 @@ namespace Du_Class.Models
         public string EnrollmentYear { get; set; }
         public string SchoolRoll { get; set; }
         public int Class_ID { get; set; }
+        public int CourseID { get; set; }
     
         public virtual Class Class { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseManage> CourseManage { get; set; }
+        public virtual Course Course { get; set; }
     }
 }

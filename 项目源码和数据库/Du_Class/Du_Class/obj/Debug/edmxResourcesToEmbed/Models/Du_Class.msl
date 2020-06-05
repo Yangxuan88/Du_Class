@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Du_ClassModelStoreContainer" CdmEntityContainer="Du_ClassEntities">
+  <EntityContainerMapping StorageEntityContainer="Du_ClassModelStoreContainer" CdmEntityContainer="Du_ClassEntities1">
     <EntitySetMapping Name="Class">
       <EntityTypeMapping TypeName="Du_ClassModel.Class">
         <MappingFragment StoreEntitySet="Class">
           <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
           <ScalarProperty Name="Major" ColumnName="Major" />
+          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -18,24 +19,14 @@
           <ScalarProperty Name="Tea_Name" ColumnName="Tea_Name" />
           <ScalarProperty Name="ClassRoom" ColumnName="ClassRoom" />
           <ScalarProperty Name="SchoolTime" ColumnName="SchoolTime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CourseManage">
-      <EntityTypeMapping TypeName="Du_ClassModel.CourseManage">
-        <MappingFragment StoreEntitySet="CourseManage">
-          <ScalarProperty Name="CurriculumID" ColumnName="CurriculumID" />
           <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-          <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Grade">
       <EntityTypeMapping TypeName="Du_ClassModel.Grade">
         <MappingFragment StoreEntitySet="Grade">
-          <ScalarProperty Name="Stu_Number" ColumnName="Stu_Number" />
+          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
           <ScalarProperty Name="Stu_Score" ColumnName="Stu_Score" />
           <ScalarProperty Name="CourseID" ColumnName="CourseID" />
         </MappingFragment>
@@ -69,6 +60,7 @@
           <ScalarProperty Name="EnrollmentYear" ColumnName="EnrollmentYear" />
           <ScalarProperty Name="SchoolRoll" ColumnName="SchoolRoll" />
           <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
