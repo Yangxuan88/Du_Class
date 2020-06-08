@@ -9,7 +9,7 @@ namespace Du_Class.Controllers
 {
     public class TeacherController : Controller
     {
-        Du_ClassEntities1 db = new Du_ClassEntities1();
+        Du_ClassEntities db = new Du_ClassEntities();
         // GET: Teacher
         public ActionResult Index()
         {
@@ -17,14 +17,26 @@ namespace Du_Class.Controllers
         }
 
         /// <summary>
-        /// 查询学生信息
+        /// 模糊查询学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuInfo()
+        public ActionResult StuInfo(string name = "")
         {
-            var stu = db.Student.ToList();
-
+            List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+            ViewBag.Name = name;
             return View(stu);
+        }
+
+        /// <summary>
+        /// 编辑学生信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StuEdit()
+        {
+
+            var stu = db.Student.ToList();
+            return View(stu);
+
         }
     }
 }

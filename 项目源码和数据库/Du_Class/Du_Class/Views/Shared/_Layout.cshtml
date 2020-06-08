@@ -12,6 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+  
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -40,7 +41,7 @@
 
         #left {
             width: 250px;
-            height: 600px;
+            height: 650px;
             background-color: beige;
         }
 
@@ -48,7 +49,7 @@
             width: 1300px;
             float: right;
             height: 480px;
-            margin-top: -600px;
+            margin-top: -650px;
         }
     </style>
 </head>
@@ -101,9 +102,11 @@
         </div>*@
     <div class="pageContent">
         <div id="left">
-            <!-- 左侧导航栏 -->    
+      
+            <!-- 左侧导航栏 -->
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
+
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion"
@@ -115,11 +118,16 @@
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <a href="~/Teacher/StuInfo" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;学生查询
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生信息
                             </a>
-
+                        </div>
+                        <div class="panel-body">
+                            <a href="~/Teacher/StuEdit" style="text-decoration:none">
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;编辑学生信息
+                            </a>
                         </div>
                     </div>
+
                 </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">
@@ -133,7 +141,17 @@
                     <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             <a href="" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;发布课程
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加课程
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <a href="~/Course/Index" style="text-decoration:none">
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看课程
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <a href="" style="text-decoration:none">
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改课程
                             </a>
                         </div>
                     </div>
@@ -152,10 +170,15 @@
                             <a href="" style="text-decoration:none">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生成绩
                             </a>
-                        </div>  
+                        </div>
+                        <div class="panel-body">
+                            <a href="~/Student/Index" style="text-decoration:none">
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生成绩
+                            </a>
+                        </div>
                         <div class="panel-body">
                             <a href="" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生成绩
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改学生成绩
                             </a>
                         </div>
                     </div>
@@ -173,6 +196,11 @@
                         <div class="panel-body">
                             <a href="" style="text-decoration:none">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;发布通知
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <a href="" style="text-decoration:none">
+                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看通知
                             </a>
                         </div>
                     </div>
@@ -194,7 +222,7 @@
                             </a>
                         </div>
                         <div class="panel-body">
-                            <a href="" style="text-decoration:none">
+                            <a href="~/Home/LoginTeacher" style="text-decoration:none">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;退出登录
                             </a>
                         </div>

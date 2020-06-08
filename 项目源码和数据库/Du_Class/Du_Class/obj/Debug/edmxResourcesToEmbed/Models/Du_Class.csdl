@@ -21,9 +21,9 @@
     <Property Name="ClassRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SchoolTime" Type="DateTime" Precision="0" />
     <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <Property Name="NewTime" Type="Time" Precision="7" />
     <NavigationProperty Name="Teacher" Relationship="Self.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
     <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_Course" FromRole="Course" ToRole="Grade" />
-    <NavigationProperty Name="Student" Relationship="Self.FK_Student_Course" FromRole="Course" ToRole="Student" />
   </EntityType>
   <EntityType Name="Grade">
     <Key>
@@ -32,7 +32,9 @@
     <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Stu_Score" Type="Double" />
     <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Course" Relationship="Self.FK_Grade_Course" FromRole="Grade" ToRole="Course" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Grade_Student" FromRole="Grade" ToRole="Student" />
   </EntityType>
   <EntityType Name="News">
     <Key>
@@ -60,12 +62,11 @@
     <Property Name="NativePlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PoliticsStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-    <Property Name="EnrollmentYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EnrollmentYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SchoolRoll" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Class_ID" Type="Int32" Nullable="false" />
-    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="Class_ID" Type="Int32" />
     <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
-    <NavigationProperty Name="Course" Relationship="Self.FK_Student_Course" FromRole="Student" ToRole="Course" />
+    <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_Student" FromRole="Student" ToRole="Grade" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -103,7 +104,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Student_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -138,15 +139,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Student_Course">
-    <End Role="Course" Type="Self.Course" Multiplicity="1" />
-    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+  <Association Name="FK_Grade_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="CourseID" />
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
       </Principal>
-      <Dependent Role="Student">
-        <PropertyRef Name="CourseID" />
+      <Dependent Role="Grade">
+        <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -162,7 +163,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Du_ClassEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Du_ClassEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Class" EntityType="Self.Class" />
     <EntitySet Name="Course" EntityType="Self.Course" />
     <EntitySet Name="Grade" EntityType="Self.Grade" />
@@ -186,9 +187,9 @@
       <End Role="Course" EntitySet="Course" />
       <End Role="Grade" EntitySet="Grade" />
     </AssociationSet>
-    <AssociationSet Name="FK_Student_Course" Association="Self.FK_Student_Course">
-      <End Role="Course" EntitySet="Course" />
+    <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
       <End Role="Student" EntitySet="Student" />
+      <End Role="Grade" EntitySet="Grade" />
     </AssociationSet>
     <AssociationSet Name="FK_News_Teacher" Association="Self.FK_News_Teacher">
       <End Role="Teacher" EntitySet="Teacher" />

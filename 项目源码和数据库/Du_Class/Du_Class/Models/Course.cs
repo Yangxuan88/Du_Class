@@ -18,7 +18,6 @@ namespace Du_Class.Models
         public Course()
         {
             this.Grade = new HashSet<Grade>();
-            this.Student = new HashSet<Student>();
         }
     
         public int CourseID { get; set; }
@@ -27,11 +26,10 @@ namespace Du_Class.Models
         public string ClassRoom { get; set; }
         public Nullable<System.DateTime> SchoolTime { get; set; }
         public int TeacherID { get; set; }
+        public Nullable<System.TimeSpan> NewTime { get; set; }
     
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grade { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Student { get; set; }
     }
 }

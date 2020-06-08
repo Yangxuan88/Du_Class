@@ -172,7 +172,6 @@ G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据�
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EntityFramework.xml
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EntityFramework.SqlServer.xml
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\zh-Hans\EntityFramework.resources.dll
-G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.csprojAssemblyReference.cache
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\Du_Class.dll.config
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\Du_Class.dll
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\Du_Class.pdb

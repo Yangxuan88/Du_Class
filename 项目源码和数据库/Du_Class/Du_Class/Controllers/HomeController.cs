@@ -9,7 +9,7 @@ namespace Du_Class.Controllers
 {
     public class HomeController : Controller
     {
-        Du_ClassEntities1 db = new Du_ClassEntities1();
+        Du_ClassEntities db = new Du_ClassEntities();
 
         public ActionResult Index()
         {
@@ -36,6 +36,7 @@ namespace Du_Class.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult LoginTeacher(string TeacherName, string passWord,string ValidateCode)
         {
@@ -54,6 +55,15 @@ namespace Du_Class.Controllers
                     return RedirectToAction("Index", "Teacher");
                 }
             }
+            return View();
+        }
+
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ForGetPwd()
+        {
             return View();
         }
 

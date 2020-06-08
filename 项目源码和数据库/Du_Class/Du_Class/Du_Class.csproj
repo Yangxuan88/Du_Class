@@ -131,6 +131,7 @@
     <Compile Include="Code\code.ashx.cs">
       <DependentUpon>code.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -191,6 +192,7 @@
       <DependentUpon>Du_Class.edmx</DependentUpon>
       <LastGenOutput>Du_Class.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Code.js" />
     <Content Include="Scripts\front.js" />
     <Content Include="Content\style.default.css" />
     <Content Include="favicon.ico" />
@@ -237,10 +239,13 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Home\LoginTeacher.cshtml" />
     <Content Include="Views\Teacher\StuInfo.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Home\ForGetPwd.cshtml" />
+    <Content Include="Views\Teacher\StuEdit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

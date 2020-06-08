@@ -13,10 +13,10 @@ namespace Du_Class.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Du_ClassEntities1 : DbContext
+    public partial class Du_ClassEntities : DbContext
     {
-        public Du_ClassEntities1()
-            : base("name=Du_ClassEntities1")
+        public Du_ClassEntities()
+            : base("name=Du_ClassEntities")
         {
         }
     
