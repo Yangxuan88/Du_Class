@@ -38,5 +38,24 @@ namespace Du_Class.Controllers
             return View(stu);
 
         }
+
+        /// <summary>
+        /// 添加班级
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult TeaClass() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TeaClass(Teacher tea,Class c)
+        {
+            db.Teacher.Add(tea);
+            db.Class.Add(c);
+            db.SaveChanges();
+            return View();
+        }
+
     }
 }

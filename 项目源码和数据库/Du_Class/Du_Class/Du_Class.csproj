@@ -243,6 +243,8 @@
     <Content Include="Views\Home\ForGetPwd.cshtml" />
     <Content Include="Views\Teacher\StuEdit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\AddStu.cshtml" />
+    <Content Include="Views\Teacher\TeaClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
