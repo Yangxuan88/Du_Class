@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "TeaClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li><a href="#">班级管理</a></li>
+    <li class="active">添加班级信息</li>
+</ul>
+
+
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/Teacher/TeaClass" id="form1">
+    <div class="form-group">
+        <label for="TeacherName">老师:</label>
+        @*<input type="radio" value="true" name="Sex" checked />男
+            <input type="radio" value="false" name="Sex" />女*@
+        <input type="text" value="" name="TeacherName" placeholder="请输入老师姓名" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="ClassName">班级:</label>
+        @*<input type="radio" value="true" name="Sex" checked />男
+            <input type="radio" value="false" name="Sex" />女*@
+        <input type="text" value="" name="ClassName" placeholder="请输入班级" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Major">专业:</label>
+        <input type="text" value="" name="Major" placeholder="请输入专业" class="form-control" />
+    </div>
+    <div class="form-group col-lg-12">
+        <a href="javascript:history.go(-1)" class="btn btn-link">返回</a>
+        <input type="submit" class="btn btn-danger" value="保存" />
+    </div>
+</form>

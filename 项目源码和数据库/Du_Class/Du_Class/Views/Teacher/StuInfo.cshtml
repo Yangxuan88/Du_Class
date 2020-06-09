@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "StuInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Du_Class.Models;
+@model List<Student>
+
+@{
+
+    int code = 1;
+}
+<ul class="breadcrumb">
+    <li><a href="#">班级管理</a></li>
+    <li class="active">查看学生信息</li>
+</ul>
+
+<div class="inputDiv" >
+    <form action="/Teacher/StuInfo" method="post">
+        <label for="Name">
+            姓名:
+        </label>
+            <input type="text" name="Name" id="userName" value="@ViewBag.Name" class="form-control" placeholder="请入姓名模糊查询" />
+            <input type="submit" value="查询" class="btn btn-success" />
+    </form>
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="active">
+                <td>编号</td>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>身份证</td>
+                <td>民族</td>
+                <td>籍贯</td>
+                <td>政治面貌</td>
+                <td>手机号</td>
+                <td>入学年份</td>
+                <td>学籍状态</td>
+                <td>照片</td>
+                <td>班级</td>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="warning">
+                <td>@(code++)</td>
+                <td>@item.Stu_Namber</td>
+                <td>@item.Stu_Name</td>
+                <td>@item.Stu_Sex</td>
+                <td>@item.IDCard</td>
+                <td>@item.Nation</td>
+                <td>@item.NativePlace</td>
+                <td>@item.PoliticsStatus</td>
+
+                <td>@item.Phone</td>
+                <td>@item.EnrollmentYear</td>
+
+                @*<td>@item.SchoolRoll</td>*@
+                @if (item.SchoolRoll == "1")
+                {
+                    <td>正常</td>
+                }
+                else if (item.SchoolRoll == "0")
+                {
+                    <td>退学</td>
+                }
+                else
+                {
+                    <td>休学</td>
+                }
+                <td><img src="@item.Stu_Photo" /></td>
+                <td>@item.Class.ClassName</td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
