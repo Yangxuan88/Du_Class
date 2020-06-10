@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Du_Class.Models;
+using Du_Class.SMS;
 
 namespace Du_Class.Controllers
 {
@@ -64,6 +65,27 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult ForGetPwd()
         {
+            //string phone = "17346914589";
+            //Random rad = new Random();//实例化随机数产生器rad；
+            //int value = rad.Next(100000, 1000000);//用rad生成大于等于100000，小于等于999999的随机数；
+
+            //try
+            //{
+            //    //返回200 及成功
+            //    if (SMS_Code.SendSms(phone, 0, value) == 200)
+            //    {
+            //        //发送成功时 将验证码返回给客户端进行验证判断
+            //        return View();
+            //    }
+            //    else
+            //    {
+            //        return View();
+            //    }
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
             return View();
         }
 

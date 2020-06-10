@@ -264,3 +264,5 @@ F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据�
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.dll
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.pdb
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.csprojAssemblyReference.cache
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\aliyun-net-sdk-core.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\zh-Hans\EntityFramework.SqlServer.resources.dll

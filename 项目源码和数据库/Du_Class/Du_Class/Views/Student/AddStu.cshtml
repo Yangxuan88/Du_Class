@@ -6,13 +6,16 @@
 
 @using Du_Class.Models;
 @{ 
-    List<Class> c = ViewBag.Class;
+    List<Student> stu = ViewBag.stu;
+    List<Class> cal = ViewBag.CAL;
 }
+
 <ul class="breadcrumb">
    
     <li><a href="#">班级管理</a></li>
     <li class="active">添加学生信息</li>
 </ul>
+
 
 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/Student/AddStu" id="form1">
     <div class="form-group col-lg-6">
@@ -52,38 +55,37 @@
         <label for="Phone">手机号:</label>
         <input type="text" value="" name="Phone" placeholder="请输入手机号" class="form-control" />
     </div>
+    <div class="form-group col-lg-6">
+        <label for="Class_ID">班级:</label>   
+        <select class="form-control" name="Class_ID">
+            @foreach (var item in ViewBag.CAL as List<Class>)
+            {
+                <option name="Class_ID" value="@item.Class_ID">@item.ClassName</option>
+            }
+        </select>
+    </div>
 
     <div class="form-group col-lg-6">
         <label for="EnrollmentYear">入学年份:</label>
         <select class="form-control" name="EnrollmentYear">
-
             <option value="2018">2018</option>
-
         </select>
     </div>
 
     <div class="form-group col-lg-6">
         <label for="SchoolRoll">学籍状态:</label>
         <select class="form-control" name="SchoolRoll">
-            <option value="0">正常</option>
-            <option value="1">休学</option>
-            <option value="2">退学</option>
+            <option value="0">退学</option>
+            <option value="1" selected>正常</option>
+            <option value="2">休学</option>
         </select>
     </div>
-    <div class="form-group col-lg-6">
-        <label for="ClassName">班级:</label>
-        @*<input type="text" value="" name="ClassName" placeholder="请输入班级" class="form-control" />*@
 
-        <select class="form-control" name="ClassName">
-            <option value="2018173801">2018173801</option>
-            <option value="2018173802">2018173802</option>
-        </select>
-    </div>
     <div class="form-group col-lg-6">
-            <label for="Stu_Photo">照片:</label>
-            <input type="file" name="Stu_Photo" />
-        </div>
-      
+        <label for="Stu_Photo">照片:</label>
+        <input type="file" name="Stu_Photo" />
+    </div>
+
     <div class="form-group col-lg-12">
         <a href="javascript:history.go(-1)" class="btn btn-link">返回</a>
         <input type="submit" class="btn btn-danger" value="保存" />

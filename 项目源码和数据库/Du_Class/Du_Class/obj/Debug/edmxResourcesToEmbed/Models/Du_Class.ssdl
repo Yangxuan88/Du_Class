@@ -57,7 +57,7 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="11" />
     <Property Name="EnrollmentYear" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="SchoolRoll" Type="nvarchar" MaxLength="20" />
-    <Property Name="Class_ID" Type="int" />
+    <Property Name="Class_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -79,6 +79,18 @@
     <Property Name="TeacherPhone" Type="nvarchar" MaxLength="11" />
     <Property Name="Tea_Sex" Type="char" MaxLength="10" />
   </EntityType>
+  <Association Name="FK_Class_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class1" Type="Self.Class" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_ID" />
+      </Principal>
+      <Dependent Role="Class1">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Class_Teacher">
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
     <End Role="Class" Type="Self.Class" Multiplicity="*" />
@@ -140,7 +152,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Student_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -159,6 +171,10 @@
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Class_Class" Association="Self.FK_Class_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Class1" EntitySet="Class" />
+    </AssociationSet>
     <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="Class" EntitySet="Class" />

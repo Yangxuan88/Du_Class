@@ -7,7 +7,7 @@
 @model List<Student>
 
 @{
-
+   List<Teacher> tea = ViewBag.tea;
     int code = 1;
 }
 <ul class="breadcrumb">
@@ -40,44 +40,41 @@
                 <td>学籍状态</td>
                 <td>照片</td>
                 <td>班级</td>
-
-
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-            <tr class="warning">
-                <td>@(code++)</td>
-                <td>@item.Stu_Namber</td>
-                <td>@item.Stu_Name</td>
-                <td>@item.Stu_Sex</td>
-                <td>@item.IDCard</td>
-                <td>@item.Nation</td>
-                <td>@item.NativePlace</td>
-                <td>@item.PoliticsStatus</td>
+                <tr class="warning">
+                    <td>@(code++)</td>
+                    <td>@item.Stu_Namber</td>
+                    <td>@item.Stu_Name</td>
+                    <td>@item.Stu_Sex</td>
+                    <td>@item.IDCard</td>
+                    <td>@item.Nation</td>
+                    <td>@item.NativePlace</td>
+                    <td>@item.PoliticsStatus</td>
+                    <td>@item.Phone</td>
+                    <td>@item.EnrollmentYear</td>
 
-                <td>@item.Phone</td>
-                <td>@item.EnrollmentYear</td>
+                    @if (item.SchoolRoll == "1")
+                    {
+                        <td>正常</td>
+                    }
+                    else if (item.SchoolRoll == "0")
+                    {
+                        <td>退学</td>
+                    }
+                    else
+                    {
+                        <td>休学</td>
+                    }
+                    <td><img src="@item.Stu_Photo" /></td>
+                    <td>@item.Class.ClassName</td>
 
-                @*<td>@item.SchoolRoll</td>*@
-                @if (item.SchoolRoll == "1")
-                {
-                    <td>正常</td>
-                }
-                else if (item.SchoolRoll == "0")
-                {
-                    <td>退学</td>
-                }
-                else
-                {
-                    <td>休学</td>
-                }
-                <td><img src="@item.Stu_Photo" /></td>
-                <td>@item.Class.ClassName</td>
-
-            </tr>
-            }
-        </tbody>
+                    
+                    </tr>
+                    }
+            </tbody>
     </table>
 

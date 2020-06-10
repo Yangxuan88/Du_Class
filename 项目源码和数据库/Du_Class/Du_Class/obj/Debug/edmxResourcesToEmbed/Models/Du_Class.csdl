@@ -9,7 +9,9 @@
     <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TeacherID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Teacher" Relationship="Self.FK_Class_Teacher" FromRole="Class" ToRole="Teacher" />
-    <NavigationProperty Name="Student" Relationship="Self.FK_Student_Class" FromRole="Class" ToRole="Student" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Student_Student" FromRole="Class" ToRole="Student" />
+    <NavigationProperty Name="Class1" Relationship="Du_ClassModel.FK_Class_Class" FromRole="Class" ToRole="Class1" />
+    <NavigationProperty Name="Class2" Relationship="Du_ClassModel.FK_Class_Class" FromRole="Class1" ToRole="Class" />
   </EntityType>
   <EntityType Name="Course">
     <Key>
@@ -64,8 +66,8 @@
     <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Name="EnrollmentYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SchoolRoll" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Class_ID" Type="Int32" />
-    <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
+    <Property Name="Class_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Class" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Class" />
     <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_Student" FromRole="Student" ToRole="Grade" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -103,8 +105,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Student_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+  <Association Name="FK_Student_Student">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -175,7 +177,7 @@
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="Class" EntitySet="Class" />
     </AssociationSet>
-    <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
+    <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
       <End Role="Class" EntitySet="Class" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
@@ -195,5 +197,21 @@
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="News" EntitySet="News" />
     </AssociationSet>
+    <AssociationSet Name="FK_Class_Class" Association="Du_ClassModel.FK_Class_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Class1" EntitySet="Class" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Class_Class">
+    <End Type="Du_ClassModel.Class" Role="Class" Multiplicity="1" />
+    <End Type="Du_ClassModel.Class" Role="Class1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_ID" />
+      </Principal>
+      <Dependent Role="Class1">
+        <PropertyRef Name="Class_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "StuAlter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models;
+@model Student
+
+@{ 
+    List<Class> cla=ViewBag.CAL;
+}
+
+<ul class="breadcrumb">
+
+    <li><a href="#">班级管理</a></li>
+    <li class="active">修改学生信息</li>
+</ul>
+
+
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/Teacher/StuAlter" id="form1">
+    <input type="hidden" value="@Model.StudentID"  id="studentID" name="studentID"/>
+    <div class="form-group col-lg-6">
+        <label for="Stu_Name">姓名:</label>
+        <input type="text" value="@Model.Stu_Name" name="Stu_Name" placeholder="请输入姓名" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="Stu_Namber">学号:</label>
+        @*<input type="radio" value="true" name="Sex" checked />男
+            <input type="radio" value="false" name="Sex" />女*@
+        <input type="text" value="@Model.Stu_Namber" name="Stu_Namber" placeholder="请输入学号" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="Stu_Sex">性别:</label>
+        <input type="text" value="@Model.Stu_Sex" name="Stu_Sex" placeholder="请输入性别" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="IDCard">身份证:</label>
+        <input type="text" value="@Model.IDCard" name="IDCard" placeholder="请输入身份证" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="Nation">民族:</label>
+        <input type="text" value="@Model.Nation" name="Nation" placeholder="请输入民族" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="NativePlace">籍贯:</label>
+        <input type="text" value="@Model.NativePlace" name="NativePlace" placeholder="请输入籍贯" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="PoliticsStatus">政治面貌:</label>
+        <input type="text" value="@Model.PoliticsStatus" name="PoliticsStatus" placeholder="请输入政治面貌" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="Phone">手机号:</label>
+        <input type="text" value="@Model.Phone" name="Phone" placeholder="请输入手机号" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="Class_ID">班级:</label>
+        <select class="form-control" name="Class_ID">
+            @foreach (var item in cla)
+            {
+                <option name="Class_ID" value="@item.Class_ID">@item.ClassName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="EnrollmentYear">入学年份:</label>
+        <select class="form-control" name="EnrollmentYear">
+            <option value="@Model.EnrollmentYear">2018</option>
+        </select>
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="SchoolRoll">学籍状态:</label>
+        <select class="form-control" name="SchoolRoll">
+            <option value="0">退学</option>
+            <option value="1" selected>正常</option>
+            <option value="2">休学</option>
+        </select>
+    </div>
+
+    <div class="form-group col-lg-6">
+        <label for="Stu_Photo">照片:</label>
+        <input type="file" name="Stu_Photo"  value="@Model.Phone"/>
+    </div>
+
+    <div class="form-group col-lg-12">
+        <a href="javascript:history.go(-1)" class="btn btn-link">返回</a>
+        <input type="submit" class="btn btn-danger" value="保存" />
+    </div>
+</form>
+
+

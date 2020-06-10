@@ -28,5 +28,7 @@ namespace Du_Class.Models
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Student { get; set; }
+        public virtual Class Class1 { get; set; }
+        public virtual Class Class2 { get; set; }
     }
 }

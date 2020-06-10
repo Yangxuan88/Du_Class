@@ -19,10 +19,9 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult Index(string name = "")
         {
-
+           
             List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
             ViewBag.Name = name;
-            
             return View(stu);
 
 
@@ -35,7 +34,8 @@ namespace Du_Class.Controllers
        /// <returns></returns>
         public ActionResult AddStu()
         {
-
+            List<Class> cla = db.Class.ToList();
+            ViewBag.CAL = cla;
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace Du_Class.Controllers
             db.Student.Add(stu);
             db.SaveChanges();
 
-            return RedirectToAction("Teacher", "StuInfo");
+            return RedirectToAction("StuInfo", "Teacher");
         }
 
     }
