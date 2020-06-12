@@ -27,6 +27,8 @@ namespace Du_Class.Models
         public Nullable<System.DateTime> SchoolTime { get; set; }
         public int TeacherID { get; set; }
         public Nullable<System.TimeSpan> NewTime { get; set; }
+        public string SchoolYear { get; set; }
+        public string Term { get; set; }
     
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

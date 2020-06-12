@@ -14,6 +14,8 @@
     <EntitySetMapping Name="Course">
       <EntityTypeMapping TypeName="Du_ClassModel.Course">
         <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="Term" ColumnName="Term" />
+          <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
           <ScalarProperty Name="CourseID" ColumnName="CourseID" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />
           <ScalarProperty Name="Tea_Name" ColumnName="Tea_Name" />

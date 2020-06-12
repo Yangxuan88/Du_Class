@@ -16,70 +16,78 @@
     <li><a href="#">成绩管理</a></li>
     <li class="active">查看学生成绩</li>
 </ul>
-
-<div class="inputDiv">
-    <form action="/Student/Index" method="post">
-        <label for="Name">
-            姓名:
-        </label>
+<div class="col-lg-8">
+    <form action="/Student/Index" method="post" class="form-inline">
+        <label for="Name"> 姓名:</label>
         <input type="text" name="Name" id="userName" value="@ViewBag.Name" class="form-control" placeholder="请入姓名模糊查询" />
         <input type="submit" value="查询" class="btn btn-success" />
     </form>
+</div>
+<div class="col-lg-4">
+   
+
 </div>
 <table class="table table-hover table-bordered" data-spy="scroll" data-target=".navbar" data-offset="50">
     <thead>
         <tr class="active">
             <td>编号</td>
-            <td>学号</td>
-            <td>姓名</td>
-
             <td>班级</td>
-            <td>科目</td>
-            <td>成绩</td>
-
-
+            <td>姓名</td>
+            <td>学号</td>
+            <td>性别</td>
+            <td>手机号</td>
+            @*<td>操作</td>*@
+            <td>大学计算机基础</td>
+            <td>软件工程</td>
+            @*<td>大学体育</td>
+            <td>大学英语</td>
+            <td>c语言程序设计</td>*@
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="warning">
-                <td>@(code++)</td>
-                <td>@item.Stu_Namber</td>
-                <td>@item.Stu_Name</td>
-                <td>@item.Class.ClassName</td>
-                @foreach (var item1 in item.Grade)
-                {
-                    <td>@item1.Course.CourseName</td>
-                    <td>@item1.Stu_Score</td>
+        <tr class="warning">
+            <td>@(code++)</td>
+            <td>@item.Class.ClassName</td>
+            <td>@item.Stu_Name</td>
+            <td>@item.Stu_Namber</td>
+            <td>@item.Stu_Sex</td>
+            <td>@item.Phone</td>
+            @*<td><a href="~/Student/LookStu?id=@item.StudentID" class="btn btn-success">查看</a></td>*@
+            @foreach (var item1 in item.Grade)
+            {
+                @*<td>@item1.Course.CourseName</td>*@
+                <td>@item1.Stu_Score</td>
 
-                }
+                @*<td>@item1.Course.SchoolYear</td>*@
+            }
 
-                @*<td>@item.Stu_Sex</td>
-                    <td>@item.IDCard</td>
-                    <td>@item.Nation</td>
-                    <td>@item.NativePlace</td>
-                    <td>@item.PoliticsStatus</td>
+            @*<td>@item.Stu_Sex</td>
+        <td>@item.IDCard</td>
+        <td>@item.Nation</td>
+        <td>@item.NativePlace</td>
+        <td>@item.PoliticsStatus</td>
 
-                    <td>@item.Phone</td>
-                    <td>@item.EnrollmentYear</td>
+        <td>@item.Phone</td>
+        <td>@item.EnrollmentYear</td>
 
-                    <td>@item.SchoolRoll</td>
-                    @if (item.SchoolRoll == "1")
-                    {
-                        <td>正常</td>
-                    }
-                    else if (item.SchoolRoll == "0")
-                    {
-                        <td>退学</td>
-                    }
-                    else
-                    {
-                        <td>休学</td>
-                    }
-                    <td>@item.Class.ClassName</td>*@
+        <td>@item.SchoolRoll</td>
+        @if (item.SchoolRoll == "1")
+        {
+            <td>正常</td>
+        }
+        else if (item.SchoolRoll == "0")
+        {
+            <td>退学</td>
+        }
+        else
+        {
+            <td>休学</td>
+        }
+        <td>@item.Class.ClassName</td>*@
 
-            </tr>
+        </tr>
         }
     </tbody>
 

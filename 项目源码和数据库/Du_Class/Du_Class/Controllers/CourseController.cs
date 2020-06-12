@@ -14,7 +14,8 @@ namespace Du_Class.Controllers
         public ActionResult Index()
         {
             List<Course> course = db.Course.ToList();
-
+            List<Class> cla = db.Class.ToList();
+            ViewBag.cla = cla;
             return View(course);
         }
 

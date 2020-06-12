@@ -16,7 +16,16 @@
     <li><a href="#">班级管理</a></li>
     <li class="active">编辑学生信息</li>
 </ul>
+<div class="col-lg-8">
+    <form action="/Teacher/StuInfo" method="post" class="form-inline">
+        <label for="Name">姓名: </label>
+        <input type="text" name="Name" id="userName" value="@ViewBag.Name" class="form-control" placeholder="请入姓名模糊查询" />
+        <input type="submit" value="查询" class="btn btn-success" />
+    </form>
+</div>
+<div class="col-lg-4">
 
+</div>
 <br />
 <table class="table table-hover table-bordered">
     <thead>

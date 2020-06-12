@@ -21,11 +21,22 @@ namespace Du_Class.Controllers
         {
            
             List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+            List<Class> cla = db.Class.ToList();
+            ViewBag.CAL=cla;
             ViewBag.Name = name;
+         
             return View(stu);
+        }
 
+        /// <summary>
+        /// 查看学生成绩
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LookStu(int? id)
+        {
+            var stu = db.Student.Find(id);
 
-
+            return View(stu);
         }
 
        /// <summary>
@@ -67,6 +78,16 @@ namespace Du_Class.Controllers
             db.SaveChanges();
 
             return RedirectToAction("StuInfo", "Teacher");
+        }
+
+        /// <summary>
+        /// 添加学生成绩
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddStuGrade()
+        {
+            var stu = db.Student.ToList();
+            return View(stu);
         }
 
     }

@@ -26,6 +26,8 @@
     <Property Name="NewTime" Type="Time" Precision="7" />
     <NavigationProperty Name="Teacher" Relationship="Self.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
     <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_Course" FromRole="Course" ToRole="Grade" />
+    <Property Name="SchoolYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Grade">
     <Key>

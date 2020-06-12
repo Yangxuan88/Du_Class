@@ -25,6 +25,8 @@
           <Property Name="SchoolTime" Type="date" />
           <Property Name="TeacherID" Type="int" Nullable="false" />
           <Property Name="NewTime" Type="time" Precision="7" />
+          <Property Name="SchoolYear" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Term" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -84,18 +86,6 @@
           <Property Name="TeacherPhone" Type="nvarchar" MaxLength="11" />
           <Property Name="Tea_Sex" Type="char" MaxLength="10" />
         </EntityType>
-        <Association Name="FK_Class_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="Class1" Type="Self.Class" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Class">
-              <PropertyRef Name="Class_ID" />
-            </Principal>
-            <Dependent Role="Class1">
-              <PropertyRef Name="Class_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Class_Teacher">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Class" Type="Self.Class" Multiplicity="*" />
@@ -176,10 +166,6 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Class_Class" Association="Self.FK_Class_Class">
-            <End Role="Class" EntitySet="Class" />
-            <End Role="Class1" EntitySet="Class" />
-          </AssociationSet>
           <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Class" EntitySet="Class" />
@@ -235,6 +221,8 @@
           <Property Name="NewTime" Type="Time" Precision="7" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
           <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_Course" FromRole="Course" ToRole="Grade" />
+          <Property Name="SchoolYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -442,6 +430,8 @@
           <EntitySetMapping Name="Course">
             <EntityTypeMapping TypeName="Du_ClassModel.Course">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="Tea_Name" ColumnName="Tea_Name" />

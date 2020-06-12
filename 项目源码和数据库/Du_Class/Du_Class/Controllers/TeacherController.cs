@@ -25,9 +25,16 @@ namespace Du_Class.Controllers
         {
             List<Teacher> tea = db.Teacher.ToList();
                 ViewBag.tea = tea;
-            List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+
+            List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
             ViewBag.Name = name;
-           
+
+            //List<Student> stu1 = db.Student.Where((p => p.Class.ClassName.Contains(className) || p.Class.ClassName == "")).ToList();
+
+            ////List<Class> cla = db.Class.Where(p => p.ClassName.Contains(className) || p.ClassName == "").ToList();
+            //ViewBag.className = className;
+            //ViewBag.cla = cla;
+     
             return View(stu);
         }
 
@@ -35,10 +42,11 @@ namespace Du_Class.Controllers
         /// 编辑学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuEdit()
+        public ActionResult StuEdit(string name = "")
         {
 
-            var stu = db.Student.ToList();
+            List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
+            ViewBag.Name = name;
             return View(stu);
 
         }
