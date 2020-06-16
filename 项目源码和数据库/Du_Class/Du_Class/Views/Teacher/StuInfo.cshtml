@@ -9,72 +9,544 @@
 @{
     List<Teacher> tea = ViewBag.tea;
     List<Class> cla = ViewBag.cla;
+    Class c = ViewBag.c;
     int code = 1;
+
 }
 <ul class="breadcrumb">
     <li><a href="#">班级管理</a></li>
     <li class="active">查看学生信息</li>
 </ul>
-<div class="col-lg-8">
-    <form action="/Teacher/StuInfo" method="post"  class="form-inline">
+<div class="col-lg-9">
+    @*<a href="#" id="BatchDelete">批量删除</a>*@
+</div>
+<div class="col-lg-3">
+    <form action="/Teacher/StuInfo" method="post" class="form-inline">
         <label for="Name">姓名: </label>
         <input type="text" name="Name" id="userName" value="@ViewBag.Name" class="form-control" placeholder="请入姓名模糊查询" />
         <input type="submit" value="查询" class="btn btn-success" />
     </form>
 </div>
-<div class="col-lg-4">
+<table class="table table-hover table-bordered" id="Tabal">
+    <thead>
+        <tr class="active" id="firstTr">
+            @*<th><input type="checkbox" id="selectAll" />全选</th>*@
+            <td>编号</td>
+            <td>班级</td>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>身份证</td>
+            <td>民族</td>
+            <td>籍贯</td>
+            <td>政治面貌</td>
+            <td>手机号</td>
+            <td>入学年份</td>
+            <td>学籍状态</td>
+            <td>照片</td>
 
-</div>
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr class="active">
-                <td>编号</td>
-                <td>学号</td>
-                <td>姓名</td>
-                <td>性别</td>
-                <td>身份证</td>
-                <td>民族</td>
-                <td>籍贯</td>
-                <td>政治面貌</td>
-                <td>手机号</td>
-                <td>入学年份</td>
-                <td>学籍状态</td>
-                <td>照片</td>
-                <td>班级</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="warning">
+                @*<td><input type="checkbox" name="sub" value="@item.StudentID" /></td>*@
+                <td>@(code++)</td>
+                <td>@item.Class.ClassName</td>
+                <td>@item.Stu_Namber</td>
+                <td>@item.Stu_Name</td>
+                <td>@item.Stu_Sex</td>
+                <td>@item.IDCard</td>
+                <td>@item.Nation</td>
+                <td>@item.NativePlace</td>
+                <td>@item.PoliticsStatus</td>
+                <td>@item.Phone</td>
+                <td>@item.EnrollmentYear</td>
+
+                @if (item.SchoolRoll == "1")
+                {
+                    <td>正常</td>
+                }
+                else if (item.SchoolRoll == "0")
+                {
+                    <td>退学</td>
+                }
+                else
+                {
+                    <td>休学</td>
+                }
+                <td><img src="~/Images/@item.Stu_Photo" width="50" height="50" /></td>
+
+
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="warning">
-                    <td>@(code++)</td>
-                    <td>@item.Stu_Namber</td>
-                    <td>@item.Stu_Name</td>
-                    <td>@item.Stu_Sex</td>
-                    <td>@item.IDCard</td>
-                    <td>@item.Nation</td>
-                    <td>@item.NativePlace</td>
-                    <td>@item.PoliticsStatus</td>
-                    <td>@item.Phone</td>
-                    <td>@item.EnrollmentYear</td>
+        }
+    </tbody>
+</table>
 
-                    @if (item.SchoolRoll == "1")
-                    {
-                        <td>正常</td>
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 2, 4, 5, 10, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (ViewBag.pageIndex < ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+@*@section scripts{
+    <script type="text/javascript">
+        //全选
+        $("#selectAll").on('click', function () {
+            $("input[name='sub']").prop("checked", this.checked);
+        });
+        //反选
+        $("input[name='sub']").on('click', function () {
+            var $subs = $("input[name='sub']");
+            $("#selectAll").prop("checked", $subs.length == $subs.filter(":checked").length ? true : false);
+        });
+
+        //批量删除
+        $("#BatchDelete").click(function () {
+            var checked = $("input[name='sub']:checked");//获得复选框选中的值
+            if (checked.length == 0) {
+                alert("请选择要删除的记录！");
+                return;
+            }
+            //将获取的值存入数组
+            var checkData = new Array();
+            checked.each(function () {
+                checkData.push($(this).val());
+            })
+
+            //提交数据到后台进行删除
+            $.ajax({
+                type: "post",
+                url: "/Teacher/BatchDelete",
+                data: {
+                    "checkData": checkData.toString()
+                },
+                success: function (data) {
+                    if (data == "1") {
+                        alert("删除成功");
                     }
-                    else if (item.SchoolRoll == "0")
-                    {
-                        <td>退学</td>
+                    else {
+                        alert("删除失败");
                     }
-                    else
-                    {
-                        <td>休学</td>
+                    window.location.reload();//页面刷新
+                },
+                error: function (xhr, testStatus, errorThrown) {
+                    //错误信息处理
+                    alert("出现错误，请稍后再试！");
+                }
+
+            })
+        });
+    </script>
+}*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+        function test(a_test) {
+            //var url = "${pageContest.request.contextpath}/Class_ID";
+            var data = {
+                a_test: a_test,
+            };
+            var Class_ID;
+
+            $.ajax({
+                type: "post",
+                url: "Teacher/StuInfo",
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                async: false,
+                data: data,
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        Class_ID += '<tr>' +
+                            '<td>' +@code++'</td>' +
+                            '<td>' + result[i].Class.ClassName + '<td>' +
+                            '<td>' + result[i].Stu_Namber + '<td>' +
+                            '<td>' + result[i].Stu_Name + '<td>' +
+                            '<td>' + result[i].Stu_Sex + '<td>' +
+                            '<td>' + result[i].IDCard + '<td>' +
+                            '<td>' + result[i].Nation + '<td>' +
+                            '<td>' + result[i].NativePlace + '<td>' +
+                            '<td>' + result[i].PoliticsStatus + '<td>' +
+                            '<td>' + result[i].Phone + '<td>' +
+                            '<td>' + result[i].EnrollmentYear + '<td>'+
+                        if (result[i].SchoolRoll == "1") {
+                            '<td>' + 正常 + '</td>'
+                        }
+                        else if (result[i].SchoolRoll == "0") {
+                            '<td>' + 退学 + '</td>'
+                        }
+                        else {
+                            '<td>' + 休学 + '</td>'
+                        }
+                      +'<td>' + <img src="~/Images/result[i].Stu_Photo" width="50" height="50" /> + '</td>' + '</tr>'
                     }
-                    <td><img src="@item.Stu_Photo" /></td>
-                    <td>@item.Class.ClassName</td>
+
+                    $("#Tabal tbody tr:not(:first)").html("");
+                    $("#Tabal #firstTr").after(Class_ID);
+                },
+
+            })
+        }
+
+    </script>*@
+
+
+@*<ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#home" data-toggle="tab">
+                2018173801
+            </a>
+        </li>
+        <li><a href="#ios" data-toggle="tab">2018173802</a></li>
+
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="active">
+                        <td>编号</td>
+                        <td>班级</td>
+                        <td>学号</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>身份证</td>
+                        <td>民族</td>
+                        <td>籍贯</td>
+                        <td>政治面貌</td>
+                        <td>手机号</td>
+                        <td>入学年份</td>
+                        <td>学籍状态</td>
+                        <td>照片</td>
 
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.cla1 as List<Class>)
+                    {
+
+                        <tr class="warning">
+                            <td>@(code1++)</td>
+                            <td>@item.ClassName</td>
+
+                            @foreach (var item1 in item.Student)
+                            {
+
+                                <td>@item1.Stu_Namber</td>
+                                <td>@item1.Stu_Name</td>
+                                <td>@item1.Stu_Sex</td>
+                                <td>@item1.IDCard</td>
+                                <td>@item1.Nation</td>
+                                <td>@item1.NativePlace</td>
+                                <td>@item1.PoliticsStatus</td>
+                                <td>@item1.Phone</td>
+                                <td>@item1.EnrollmentYear</td>
+
+                                if (item1.SchoolRoll == "1")
+                                {
+                                    <td>正常</td>
+                                }
+                                else if (item1.SchoolRoll == "0")
+                                {
+                                    <td>退学</td>
+                                }
+                                else
+                                {
+                                    <td>休学</td>
+                                }
+                                <td><img src="~/Images/@item1.Stu_Photo" width="50" height="50" /></td>
+
+                            }
+
+
+
+                        </tr>
                     }
-            </tbody>
-    </table>
+                </tbody>
+
+            </table>
+
+            分页
+
+            <div classs="row">
+                <div class="col-lg-8">
+                    <label style="color:black;">总共 @ViewBag.totalCount1 行</label>
+                    <select onchange="window.location = this.value;">
+                        @{
+                            int[] count = new[] { 2, 4, 5, 10, 15 };
+                        }
+                        @foreach (var item in count)
+                        {
+                            if (item.Equals(ViewBag.pageCount1))
+                            {
+                                <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                            }
+                            else
+                            {
+                                <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount1">首页</a>
+                            </li>
+                            @if (ViewBag.pageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount1">上一页</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">上一页</a>
+                                </li>
+                            }
+
+                            <li class="page-item">
+                                <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                            </li>
+
+                            @if (ViewBag.pageIndex < ViewBag.totalPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount1">下一页</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">下一页</a>
+                                </li>
+                            }
+                            <li class="page-item"><a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount1">末页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        <div class="tab-pane fade" id="ios">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="active">
+                        <td>编号</td>
+                        <td>班级</td>
+                        <td>学号</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>身份证</td>
+                        <td>民族</td>
+                        <td>籍贯</td>
+                        <td>政治面貌</td>
+                        <td>手机号</td>
+                        <td>入学年份</td>
+                        <td>学籍状态</td>
+                        <td>照片</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.cla2 as List<Class>)
+                    {
+                        <tr class="warning">
+
+                            @foreach (var item1 in item.Student)
+                            {
+                            <tr class="warning">
+                                <td>@(code2++)</td>
+                                <td>@item.ClassName</td>
+                                <td>@item1.Stu_Namber</td>
+                                <td>@item1.Stu_Name</td>
+                                <td>@item1.Stu_Sex</td>
+                                <td>@item1.IDCard</td>
+                                <td>@item1.Nation</td>
+                                <td>@item1.NativePlace</td>
+                                <td>@item1.PoliticsStatus</td>
+                                <td>@item1.Phone</td>
+                                <td>@item1.EnrollmentYear</td>
+                                @if (item1.SchoolRoll == "1")
+                                {
+                                    <td>正常</td>
+                                }
+                                else if (item1.SchoolRoll == "0")
+                                {
+                                    <td>退学</td>
+                                }
+                                else
+                                {
+                                    <td>休学</td>
+                                }
+                                <td><img src="~/Images/@item1.Stu_Photo" width="50" height="50" /></td>
+                            </tr>
+                        }
+                            </tr>
+                        }
+                </tbody>
+            </table>
+
+
+
+            <div classs="row">
+                <div class="col-lg-8">
+                    <label style="color:black;">总共 @ViewBag.totalCount2 行</label>
+                    <select onchange="window.location = this.value;">
+                        @{
+                            int[] count1 = new[] { 2, 4, 5, 10, 15 };
+                        }
+                        @foreach (var item in count1)
+                        {
+                            if (item.Equals(ViewBag.pageCount2))
+                            {
+                                <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                            }
+                            else
+                            {
+                                <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount2">首页</a>
+                            </li>
+                            @if (ViewBag.pageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount2">上一页</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">上一页</a>
+                                </li>
+                            }
+
+                            <li class="page-item">
+                                <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                            </li>
+
+                            @if (ViewBag.pageIndex <ViewBag.totalPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount2">下一页</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">下一页</a>
+                                </li>
+                            }
+                            <li class="page-item"><a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount2">末页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>*@
+
+
+@*分页*@
 

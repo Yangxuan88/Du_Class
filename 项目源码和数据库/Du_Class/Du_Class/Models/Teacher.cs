@@ -18,7 +18,6 @@ namespace Du_Class.Models
         public Teacher()
         {
             this.Class = new HashSet<Class>();
-            this.Course = new HashSet<Course>();
             this.News = new HashSet<News>();
         }
     
@@ -30,8 +29,6 @@ namespace Du_Class.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Class { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
     }

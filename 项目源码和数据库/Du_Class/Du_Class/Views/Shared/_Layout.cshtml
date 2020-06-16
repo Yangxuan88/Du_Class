@@ -51,6 +51,11 @@
             height: 480px;
             margin-top: -650px;
         }
+        .footer{
+            margin-top:60px;
+            margin-left:700px;
+            position:fixed;
+        }
     </style>
 </head>
 
@@ -116,18 +121,14 @@
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
-                        @*<div class="panel-body">
-                            <a href="~/Teacher/TeaClass" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加班级信息
-                            </a>
-                        </div>*@
+
                         <div class="panel-body">
                             <a href="~/Teacher/StuInfo" style="text-decoration:none">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生信息
                             </a>
                         </div>
                         <div class="panel-body">
-                            <a href="~/Student/AddStu" style="text-decoration:none">
+                            <a href="~/Teacher/AddStu" style="text-decoration:none">
                                 <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生信息
                             </a>
                         </div>
@@ -168,32 +169,33 @@
                     </div>
                 </div>
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseThree" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp; 学生成绩
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <a href="~/Student/AddStuGrade" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生成绩
-                            </a>
-                        </div>
-                        <div class="panel-body">
-                            <a href="~/Student/Index" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生成绩
-                            </a>
-                        </div>
-                        <div class="panel-body">
-                            <a href="" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改学生成绩
-                            </a>
-                        </div>
-                    </div>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree" style="text-decoration:none">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp; 学生成绩
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="~/Student/AddStuGrade" style="text-decoration:none">
+                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生成绩
+                    </a>
                 </div>
+                <div class="panel-body">
+                    <a href="~/Student/Index" style="text-decoration:none">
+                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生成绩
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <a href="~/Student/EditStuGrade" style="text-decoration:none">
+                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改学生成绩
+                    </a>
+                </div>
+            </div>
+        </div>
+ 
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -262,14 +264,16 @@
             2017 &copy; NeoYang.
         </p>
     </div>
+
     <script>
      $(function () { $('#collapseFive').collapse({
         toggle: false
-    })});
-    $(function () { $('#collapseTwo').collapse('show')});
-    $(function () { $('#collapseThree').collapse('toggle')});
-    $(function () { $('#collapseOne').collapse('hide') });
-    $(function () { $('#collapseFour').collapse('hide')});
+     })
+     });
+        $(function () { $('#collapseOne').collapse('show') });
+        $(function () { $('#collapseTwo').collapse('toggle') });
+        $(function () { $('#collapseThree').collapse('show') });
+    $(function () { $('#collapseFour').collapse('toggle')});
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

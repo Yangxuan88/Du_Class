@@ -9,6 +9,9 @@
 
 <div class="form d-flex align-items-center">
     <div class="content">
+        <label>角色：</label>
+        <a href="~/Home/LoginTeacher">教师</a>
+        <a href="~/Home/LoginStudent">学生</a>
         <form method="post" action="LoginTeacher" class="form-validate" id="loginFrom">
             <div class="form-group ">
                 <input id="login-username" type="text" name="TeacherName" required data-msg="请输入用户名" placeholder="用户名" class="input-material">
@@ -18,9 +21,9 @@
             </div>
 
             @*<div class="input-group col-lg-offset-2">
-                    <input type="text" placeholder="请输入验证码" id="ValidateCode" name="ValidateCode" style="width:64%;margin-right:10px" class="input-material" />
-                    <img src="~/Code/code.ashx?id=1" alt="看不清,换一张" style="width:100px; height: 36px;" onclick="this.src=this.src+1" />
-                </div>*@
+                <input type="text" placeholder="请输入验证码" id="ValidateCode" name="ValidateCode" style="width:64%;margin-right:10px" class="input-material" />
+                <img src="~/Code/code.ashx?id=1" alt="看不清,换一张" style="width:100px; height: 36px;" onclick="this.src=this.src+1" />
+            </div>*@
             <div class="form-group">
                 <div class="code">
                     <input type="text" value="" id="code" placeholder="请输入验证码（不区分大小写）" name="ValidateCode" class="input-material" style="width:64%;margin-right:10px" />
@@ -29,14 +32,14 @@
             </div>
             @*<div class="input-group col-lg-offset-2">
 
-                </div>*@
+            </div>*@
 
             <div class="form-group">
                 @*<button id="login" type="submit" class="btn btn-primary" style="width:100px">登录</button>*@
                 <input type="submit" value=" 登录 " class="btn btn-primary" id="login" style="width:100px" />
             </div>
             <div class="form-group">
-                <a href="~/Home/ForGetPwd">忘记密码</a>
+                <a href="~/Home/ForGetPwdTeacher">忘记密码</a>
             </div>
         </form>
 
@@ -49,40 +52,41 @@
 
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    //$("#RegisterForm").validate({
-    //    rules: {
-    //        TeacherName: { required: true, maxlength: 30 },
-    //        PassWord: { required: true, checkPwd: true },
-    //       ValidateCode:{ required: true, checkPwd: true }
-    //    },
-    //    messages: {
-    //        UserName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
-    //        Password: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
-    //        ValidateCode: { required: "验证码必填！" }
-    //    }
-    //})
+        //$("#RegisterForm").validate({
+        //    rules: {
+        //        TeacherName: { required: true, maxlength: 30 },
+        //        PassWord: { required: true, checkPwd: true },
+        //       ValidateCode:{ required: true, checkPwd: true }
+        //    },
+        //    messages: {
+        //        UserName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
+        //        Password: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
+        //        ValidateCode: { required: "验证码必填！" }
+        //    }
+        //})
 
-    $("#loginFrom").validate({
-        rules: {
-            TeacherName: { required: true, maxlength: 30 },
-            PassWord: { required: true, checkPwd: true },
+        $("#loginFrom").validate({
+            rules: {
+                TeacherName: { required: true, maxlength: 30 },
+                PassWord: { required: true, checkPwd: true },
 
 
-        },
-        messages: {
-            TeacherName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
-            PassWord: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
+            },
+            messages: {
+                TeacherName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
+                PassWord: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
 
-        }
-    })
-    $.validator.addMethod("checkPwd", function (value, e) {
-        var reg = /^[A-Za-z0-9]{6,12}$/;
-        return reg.test(value);
-    })
+            }
+        })
+        $.validator.addMethod("checkPwd", function (value, e) {
+            var reg = /^[A-Za-z0-9]{6,12}$/;
+            return reg.test(value);
+        })
 
-</script>
+    </script>
+
 
 <script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
 

@@ -14,14 +14,12 @@
     <EntitySetMapping Name="Course">
       <EntityTypeMapping TypeName="Du_ClassModel.Course">
         <MappingFragment StoreEntitySet="Course">
-          <ScalarProperty Name="Term" ColumnName="Term" />
-          <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
           <ScalarProperty Name="CourseID" ColumnName="CourseID" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />
           <ScalarProperty Name="Tea_Name" ColumnName="Tea_Name" />
           <ScalarProperty Name="ClassRoom" ColumnName="ClassRoom" />
           <ScalarProperty Name="SchoolTime" ColumnName="SchoolTime" />
-          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+          <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
           <ScalarProperty Name="NewTime" ColumnName="NewTime" />
         </MappingFragment>
       </EntityTypeMapping>

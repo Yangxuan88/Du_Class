@@ -24,7 +24,8 @@ namespace Du_Class.Controllers
             List<Class> cla = db.Class.ToList();
             ViewBag.CAL=cla;
             ViewBag.Name = name;
-         
+            List<Course> course = db.Course.ToList();
+            ViewBag.course = course;
             return View(stu);
         }
 
@@ -39,46 +40,7 @@ namespace Du_Class.Controllers
             return View(stu);
         }
 
-       /// <summary>
-       /// 添加学生信息
-       /// </summary>
-       /// <returns></returns>
-        public ActionResult AddStu()
-        {
-            List<Class> cla = db.Class.ToList();
-            ViewBag.CAL = cla;
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult AddStu(Student stu, HttpPostedFileBase Photo)
-        {
-            //处理图片
-            //if (Photo != null)
-            //{
-            //    string fileName = Path.GetFileName(Photo.FileName);//获得上传文件名字
-            //    string e = Path.GetExtension(fileName);
-            //    if (e == ".jpg" || e == ".png" || e == ".jif" || e == ".jpeg")
-            //    {
-            //        //保存到服务器中
-            //        Photo.SaveAs(Server.MapPath("~/images/images/users/" + fileName));
-            //       stu.Stu_Photo= fileName;
-            //    }
-            //    else
-            //    {
-            //        ViewBag.Message = "图片格式上传不正确！";
-            //    }
-
-            //}
-
-            //添加用户信息
-            //db.Class.Add(c);
-            db.Student.Add(stu);
-            db.SaveChanges();
-
-            return RedirectToAction("StuInfo", "Teacher");
-        }
+    
 
         /// <summary>
         /// 添加学生成绩
@@ -86,9 +48,97 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult AddStuGrade()
         {
-            var stu = db.Student.ToList();
+            List<Grade> gra = db.Grade.ToList();
+            List<Student>stu = db.Student.ToList();
+            ViewBag.stu = stu;
+            //var cal = db.Class.ToList();
+            //ViewBag.CAL = cal;
+             List<Course> course = db.Course.ToList();
+            ViewBag.course = course;
+            return View(gra);
+        }
+
+        [HttpPost]
+        public ActionResult AddStuGrade(Grade grade ) {
+           List<Grade> gra = db.Grade.ToList();
+            int a = 0;
+            foreach (var item in gra)
+            {
+                    if (item.CourseID==grade.CourseID&&item.StudentID==grade.StudentID)
+                    {
+                       a = 1;
+                    break;
+                    }                   
+                    else
+                    {
+                    a = 2;
+                    continue; 
+                    }
+                }
+
+            if (a==2)
+            {
+                db.Grade.Add(grade);
+                db.SaveChanges();
+                return RedirectToAction("AddStuGrade");
+            }
+            else
+            {
+                return Content("<script>alert('此学生已有该课程成绩！');history.go(-1)</script>");
+            }           
+        }
+
+        /// <summary>
+        /// 修改学生成绩
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditStuGrade(string name="")
+        {
+            List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+      
+            ViewBag.Name = name;
+            List<Course> course = db.Course.ToList();
+            ViewBag.course = course;
+            List<Grade> grade = db.Grade.ToList();
+            ViewBag.grade = grade;
             return View(stu);
         }
 
+        /// <summary>
+        /// 删除成绩
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //public ActionResult StuGradeDelete(int? id)
+        //{
+        //    var stu = db.Student.Find(id);
+
+
+        //    db.SaveChanges();
+        //    return View();
+        //}
+
+        /// <summary>
+        /// 修改成绩
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditGrade(int? id) 
+        {
+            Student stu = db.Student.Find(id);
+            ViewBag.stu = stu;
+            List<Grade> grade = db.Grade.ToList();
+            ViewBag.grade = grade;
+            return View();
+          }
+        [HttpPost]
+        public ActionResult EditGrade(Grade grade)
+        {
+         
+                db.Entry(grade).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+          
+            return RedirectToAction("EditStuGrade");
+        }
     }
 }

@@ -18,12 +18,12 @@ namespace Du_Class.SMS
         /// <summary>
         /// 阿里短信id
         /// </summary>
-        private const string appId = "LTAI4G1h6TiemJzNeHqR7NmV";
+        private const string appId = "LTAI4GJtjTaJrQVjMDBJzsre";
 
         /// <summary>
         /// 阿里短信密码
         /// </summary>
-        private const string appPwd = "yTChd92SnN4Pl9CtjAUKdnLKEQmtxE";
+        private const string appPwd = "Na234gy9Izw2LJMQt44R5cVLaNVqWt";
 
 
         /// <summary>

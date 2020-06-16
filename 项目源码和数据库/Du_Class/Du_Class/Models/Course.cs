@@ -25,12 +25,10 @@ namespace Du_Class.Models
         public string Tea_Name { get; set; }
         public string ClassRoom { get; set; }
         public Nullable<System.DateTime> SchoolTime { get; set; }
-        public int TeacherID { get; set; }
+        public int Class_ID { get; set; }
         public Nullable<System.TimeSpan> NewTime { get; set; }
-        public string SchoolYear { get; set; }
-        public string Term { get; set; }
     
-        public virtual Teacher Teacher { get; set; }
+        public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grade { get; set; }
     }

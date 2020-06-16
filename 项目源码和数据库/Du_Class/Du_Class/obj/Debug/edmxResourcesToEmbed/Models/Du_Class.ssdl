@@ -18,10 +18,8 @@
     <Property Name="Tea_Name" Type="nvarchar" MaxLength="50" />
     <Property Name="ClassRoom" Type="nvarchar" MaxLength="50" />
     <Property Name="SchoolTime" Type="date" />
-    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="Class_ID" Type="int" Nullable="false" />
     <Property Name="NewTime" Type="time" Precision="7" />
-    <Property Name="SchoolYear" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Term" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Grade">
     <Key>
@@ -57,9 +55,9 @@
     <Property Name="NativePlace" Type="nvarchar" MaxLength="50" />
     <Property Name="PoliticsStatus" Type="nvarchar" MaxLength="20" />
     <Property Name="Phone" Type="nvarchar" MaxLength="11" />
-    <Property Name="EnrollmentYear" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EnrollmentYear" Type="nvarchar" MaxLength="50" />
     <Property Name="SchoolRoll" Type="nvarchar" MaxLength="20" />
-    <Property Name="Class_ID" Type="int" Nullable="false" />
+    <Property Name="Class_ID" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -93,15 +91,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Course_Teacher">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+  <Association Name="FK_Course_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="Course" Type="Self.Course" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Teacher">
-        <PropertyRef Name="TeacherID" />
+      <Principal Role="Class">
+        <PropertyRef Name="Class_ID" />
       </Principal>
       <Dependent Role="Course">
-        <PropertyRef Name="TeacherID" />
+        <PropertyRef Name="Class_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -142,7 +140,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Student_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -165,8 +163,8 @@
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="Class" EntitySet="Class" />
     </AssociationSet>
-    <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
-      <End Role="Teacher" EntitySet="Teacher" />
+    <AssociationSet Name="FK_Course_Class" Association="Self.FK_Course_Class">
+      <End Role="Class" EntitySet="Class" />
       <End Role="Course" EntitySet="Course" />
     </AssociationSet>
     <AssociationSet Name="FK_Grade_Course" Association="Self.FK_Grade_Course">

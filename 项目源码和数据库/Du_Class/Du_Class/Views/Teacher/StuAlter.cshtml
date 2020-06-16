@@ -3,12 +3,13 @@
     ViewBag.Title = "StuAlter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
 @using Du_Class.Models;
 @model Student
 
-@{ 
-    List<Class> cla=ViewBag.CAL;
+@{
+    List<Class> cla = ViewBag.CAL;
 }
 
 <ul class="breadcrumb">
@@ -19,7 +20,7 @@
 
 
 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/Teacher/StuAlter" id="form1">
-    <input type="hidden" value="@Model.StudentID"  id="studentID" name="studentID"/>
+    <input type="hidden" value="@Model.StudentID" id="studentID" name="studentID" />
     <div class="form-group col-lg-6">
         <label for="Stu_Name">姓名:</label>
         <input type="text" value="@Model.Stu_Name" name="Stu_Name" placeholder="请输入姓名" class="form-control" />
@@ -38,7 +39,7 @@
     </div>
     <div class="form-group col-lg-6">
         <label for="IDCard">身份证:</label>
-        <input type="text" value="@Model.IDCard" name="IDCard" placeholder="请输入身份证" class="form-control" />
+        <input type="text" value="@Model.IDCard" name="IDCard" placeholder="请输入身份证" class="form-control" onblur="isCardNo(this.value)"/>
     </div>
 
     <div class="form-group col-lg-6">
@@ -70,7 +71,7 @@
     <div class="form-group col-lg-6">
         <label for="EnrollmentYear">入学年份:</label>
         <select class="form-control" name="EnrollmentYear">
-            <option value="@Model.EnrollmentYear">2018</option>
+            <option value="2018">2018</option>
         </select>
     </div>
 
@@ -85,7 +86,10 @@
 
     <div class="form-group col-lg-6">
         <label for="Stu_Photo">照片:</label>
-        <input type="file" name="Stu_Photo"  value="@Model.Phone"/>
+        <img src="~/Images/@Model.Stu_Photo" height="50" width="50" />
+        <input type="hidden" value="@Model.Stu_Photo" name="Stu_Photo" />
+        <input type="file" name="EPhoto" value="@Model.Stu_Photo" />
+
     </div>
 
     <div class="form-group col-lg-12">
@@ -95,3 +99,30 @@
 </form>
 
 
+@section scripts{
+    <script type="text/javascript">
+        $("#form1").validate({
+            rules: {
+                Stu_Name: { required: true, maxlength: 10 },
+                Stu_Namber: { required: true, maxlength: 12 },
+                Stu_Sex: { required: true, maxlength: 12 },
+                IDCard: { required: true, isCardNo:true }
+            },
+            messages: {
+                Stu_Name: { required: "账号必填", maxlength: "账号输入内容不能超过10字" },
+                Stu_Namber: { required: "学号必填", ErrorMessage: "学号必须为12为数字组成" },
+                Stu_Sex: { required: "性别必填", ErrorMessage: "性别（男，女）" },
+                IDCard:{ required: "身份证必填", isCardNo: "请输入正确的身份证" },
+            }
+        })
+        $.validator.addMethod("isCardNo", function (value, e) {
+            // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if (reg.test(card) === false) {
+                alert("身份证输入不合法");
+                return false;
+            }
+        })
+
+    </script>
+}

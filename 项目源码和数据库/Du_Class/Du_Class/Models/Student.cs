@@ -33,7 +33,7 @@ namespace Du_Class.Models
         public string Phone { get; set; }
         public string EnrollmentYear { get; set; }
         public string SchoolRoll { get; set; }
-        public int Class_ID { get; set; }
+        public Nullable<int> Class_ID { get; set; }
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

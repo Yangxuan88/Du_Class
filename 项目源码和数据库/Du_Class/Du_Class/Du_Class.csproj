@@ -137,6 +137,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +188,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\p_big3.jpg" />
+    <Content Include="Images\1245.jpg" />
+    <Content Include="Images\psc.jpg" />
+    <Content Include="Images\九寨沟.jpg" />
     <Content Include="Models\Du_Class.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Du_Class.edmx</DependentUpon>
@@ -222,6 +226,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.messages_cn.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
@@ -254,6 +259,16 @@
     <Content Include="Views\Teacher\StuAlter.cshtml" />
     <Content Include="Views\Student\AddStuGrade.cshtml" />
     <Content Include="Views\Student\LookStu.cshtml" />
+    <Content Include="Views\Teacher\AddStu.cshtml" />
+    <Content Include="Views\Shared\_LayoutStudent.cshtml" />
+    <Content Include="Views\Home\LoginStudent.cshtml" />
+    <Content Include="Views\StudnetInfo\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutStuentInfo.cshtml" />
+    <Content Include="Views\StudentInfo\Index.cshtml" />
+    <Content Include="Views\Home\ForGetPwdTeacher.cshtml" />
+    <Content Include="Views\Home\ForGetPwdStudent.cshtml" />
+    <Content Include="Views\Student\EditStuGrade.cshtml" />
+    <Content Include="Views\Student\EditGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
