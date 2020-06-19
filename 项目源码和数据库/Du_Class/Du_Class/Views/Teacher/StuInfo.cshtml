@@ -19,7 +19,11 @@
 </ul>
 <div class="col-lg-9">
     @*<a href="#" id="BatchDelete">批量删除</a>*@
+    <div class="panel-heading">
+        <a href="@Url.Action("ExportToExcel")" class="btn btn-primary">导出</a>
+    </div>
 </div>
+
 <div class="col-lg-3">
     <form action="/Teacher/StuInfo" method="post" class="form-inline">
         <label for="Name">姓名: </label>
@@ -27,63 +31,69 @@
         <input type="submit" value="查询" class="btn btn-success" />
     </form>
 </div>
-<table class="table table-hover table-bordered" id="Tabal">
-    <thead>
-        <tr class="active" id="firstTr">
-            @*<th><input type="checkbox" id="selectAll" />全选</th>*@
-            <td>编号</td>
-            <td>班级</td>
-            <td>学号</td>
-            <td>姓名</td>
-            <td>性别</td>
-            <td>身份证</td>
-            <td>民族</td>
-            <td>籍贯</td>
-            <td>政治面貌</td>
-            <td>手机号</td>
-            <td>入学年份</td>
-            <td>学籍状态</td>
-            <td>照片</td>
+@*<div class="panel">
+    <div class="panel-heading">
+        <a href="@Url.Action("ExportToExcel")" class="btn btn-primary">导出</a>
+    </div>
+    <div class="panel-body">*@
+        <table class="table table-hover table-bordered" id="Tabal">
+            <thead>
+                <tr class="active" id="firstTr">
+                    @*<th><input type="checkbox" id="selectAll" />全选</th>*@
+                    <td>编号</td>
+                    <td>班级</td>
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>身份证</td>
+                    <td>民族</td>
+                    <td>籍贯</td>
+                    <td>政治面貌</td>
+                    <td>手机号</td>
+                    <td>入学年份</td>
+                    <td>学籍状态</td>
+                    <td>照片</td>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="warning">
-                @*<td><input type="checkbox" name="sub" value="@item.StudentID" /></td>*@
-                <td>@(code++)</td>
-                <td>@item.Class.ClassName</td>
-                <td>@item.Stu_Namber</td>
-                <td>@item.Stu_Name</td>
-                <td>@item.Stu_Sex</td>
-                <td>@item.IDCard</td>
-                <td>@item.Nation</td>
-                <td>@item.NativePlace</td>
-                <td>@item.PoliticsStatus</td>
-                <td>@item.Phone</td>
-                <td>@item.EnrollmentYear</td>
-
-                @if (item.SchoolRoll == "1")
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <td>正常</td>
-                }
-                else if (item.SchoolRoll == "0")
-                {
-                    <td>退学</td>
-                }
-                else
-                {
-                    <td>休学</td>
-                }
-                <td><img src="~/Images/@item.Stu_Photo" width="50" height="50" /></td>
+                    <tr class="warning">
+                        @*<td><input type="checkbox" name="sub" value="@item.StudentID" /></td>*@
+                        <td>@(code++)</td>
+                        <td>@item.Class.ClassName</td>
+                        <td>@item.Stu_Namber</td>
+                        <td>@item.Stu_Name</td>
+                        <td>@item.Stu_Sex</td>
+                        <td>@item.IDCard</td>
+                        <td>@item.Nation</td>
+                        <td>@item.NativePlace</td>
+                        <td>@item.PoliticsStatus</td>
+                        <td>@item.Phone</td>
+                        <td>@item.EnrollmentYear</td>
+
+                        @if (item.SchoolRoll == "1")
+                        {
+                            <td>正常</td>
+                        }
+                        else if (item.SchoolRoll == "0")
+                        {
+                            <td>退学</td>
+                        }
+                        else
+                        {
+                            <td>休学</td>
+                        }
+                        <td><img src="~/Images/@item.Stu_Photo" width="50" height="50" /></td>
 
 
-            </tr>
-        }
-    </tbody>
-</table>
-
+                    </tr>
+                }
+            </tbody>
+        </table>
+    @*</div>
+</div>*@
 <div classs="row">
     <div class="col-lg-8">
         <label style="color:black;">总共 @ViewBag.totalCount 行</label>
@@ -93,13 +103,13 @@
             }
             @foreach (var item in count)
             {
-                if (item.Equals(ViewBag.pageCount))
+                if (item.Equals(@ViewBag.pageCount))
                 {
-                    <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                    <option value="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
                 }
                 else
                 {
-                    <option value="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                    <option value="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
                 }
 
             }
@@ -109,12 +119,12 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                    <a class="page-link" href="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
                 </li>
-                @if (ViewBag.pageIndex > 1)
+                @if (@ViewBag.pageIndex > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                        <a class="page-link" href="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
                     </li>
                 }
                 else
@@ -128,10 +138,10 @@
                     <a class="page-link" href="#">@ViewBag.pageIndex</a>
                 </li>
 
-                @if (ViewBag.pageIndex < ViewBag.totalPage)
+                @if (@ViewBag.pageIndex < @ViewBag.totalPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                        <a class="page-link" href="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
                     </li>
                 }
                 else
@@ -140,7 +150,7 @@
                         <a class="page-link" href="#">下一页</a>
                     </li>
                 }
-                <li class="page-item"><a class="page-link" href="/Teacher/StuInfo?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                <li class="page-item"><a class="page-link" href="/Teacher/StuInfo?name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
             </ul>
         </nav>
     </div>
@@ -150,55 +160,55 @@
 
 
 @*@section scripts{
-    <script type="text/javascript">
-        //全选
-        $("#selectAll").on('click', function () {
-            $("input[name='sub']").prop("checked", this.checked);
-        });
-        //反选
-        $("input[name='sub']").on('click', function () {
-            var $subs = $("input[name='sub']");
-            $("#selectAll").prop("checked", $subs.length == $subs.filter(":checked").length ? true : false);
-        });
+        <script type="text/javascript">
+            //全选
+            $("#selectAll").on('click', function () {
+                $("input[name='sub']").prop("checked", this.checked);
+            });
+            //反选
+            $("input[name='sub']").on('click', function () {
+                var $subs = $("input[name='sub']");
+                $("#selectAll").prop("checked", $subs.length == $subs.filter(":checked").length ? true : false);
+            });
 
-        //批量删除
-        $("#BatchDelete").click(function () {
-            var checked = $("input[name='sub']:checked");//获得复选框选中的值
-            if (checked.length == 0) {
-                alert("请选择要删除的记录！");
-                return;
-            }
-            //将获取的值存入数组
-            var checkData = new Array();
-            checked.each(function () {
-                checkData.push($(this).val());
-            })
-
-            //提交数据到后台进行删除
-            $.ajax({
-                type: "post",
-                url: "/Teacher/BatchDelete",
-                data: {
-                    "checkData": checkData.toString()
-                },
-                success: function (data) {
-                    if (data == "1") {
-                        alert("删除成功");
-                    }
-                    else {
-                        alert("删除失败");
-                    }
-                    window.location.reload();//页面刷新
-                },
-                error: function (xhr, testStatus, errorThrown) {
-                    //错误信息处理
-                    alert("出现错误，请稍后再试！");
+            //批量删除
+            $("#BatchDelete").click(function () {
+                var checked = $("input[name='sub']:checked");//获得复选框选中的值
+                if (checked.length == 0) {
+                    alert("请选择要删除的记录！");
+                    return;
                 }
+                //将获取的值存入数组
+                var checkData = new Array();
+                checked.each(function () {
+                    checkData.push($(this).val());
+                })
 
-            })
-        });
-    </script>
-}*@
+                //提交数据到后台进行删除
+                $.ajax({
+                    type: "post",
+                    url: "/Teacher/BatchDelete",
+                    data: {
+                        "checkData": checkData.toString()
+                    },
+                    success: function (data) {
+                        if (data == "1") {
+                            alert("删除成功");
+                        }
+                        else {
+                            alert("删除失败");
+                        }
+                        window.location.reload();//页面刷新
+                    },
+                    error: function (xhr, testStatus, errorThrown) {
+                        //错误信息处理
+                        alert("出现错误，请稍后再试！");
+                    }
+
+                })
+            });
+        </script>
+    }*@
 
 
 

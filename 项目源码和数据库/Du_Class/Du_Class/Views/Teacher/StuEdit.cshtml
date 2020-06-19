@@ -102,11 +102,11 @@
             {
                 if (item.Equals(ViewBag.pageCount))
                 {
-                    <option value="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                    <option value="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
                 }
                 else
                 {
-                    <option value="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                    <option value="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
                 }
 
             }
@@ -116,12 +116,12 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                    <a class="page-link" href="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
                 </li>
                 @if (ViewBag.pageIndex > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                        <a class="page-link" href="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
                     </li>
                 }
                 else
@@ -138,7 +138,7 @@
                 @if (ViewBag.pageIndex < ViewBag.totalPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                        <a class="page-link" href="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
                     </li>
                 }
                 else
@@ -147,7 +147,7 @@
                         <a class="page-link" href="#">下一页</a>
                     </li>
                 }
-                <li class="page-item"><a class="page-link" href="/Teacher/StuEdit?departmentId=@ViewBag.departmentId&Name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                <li class="page-item"><a class="page-link" href="/Teacher/StuEdit?name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
             </ul>
         </nav>
     </div>

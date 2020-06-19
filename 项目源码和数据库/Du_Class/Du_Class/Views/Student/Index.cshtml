@@ -17,7 +17,7 @@
     <li class="active">查看学生成绩</li>
 </ul>
 <div class="col-lg-9">
-  
+
 </div>
 <div class="col-lg-3">
     <form action="/Student/Index" method="post" class="form-inline">
@@ -27,7 +27,7 @@
     </form>
 
 </div>
-<table class="table table-hover table-bordered" data-spy="scroll" data-target=".navbar" data-offset="50">
+<table class="table table-hover table-bordered layui-hide" data-spy="scroll" data-target=".navbar" data-offset="50" id="test">
     <thead>
         <tr class="active">
             <td>编号</td>
@@ -35,65 +35,127 @@
             <td>姓名</td>
             <td>学号</td>
             <td>性别</td>
-         
-           @foreach (var item in ViewBag.course as List<Course> )
-           {
-               <td>@item.CourseName</td>
-           }
+
+            @foreach (var item in ViewBag.course as List<Course>)
+            {
+                <td>@item.CourseName</td>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr class="warning">
-            <td>@(code++)</td>
-            <td>@item.Class.ClassName</td>
-            <td>@item.Stu_Name</td>
-            <td>@item.Stu_Namber</td>
-            <td>@item.Stu_Sex</td>
-           
-            @*<td><a href="~/Student/LookStu?id=@item.StudentID" class="btn btn-success">查看</a></td>*@
-            @foreach (var item1 in item.Grade)
-            {
-                if (item1.Stu_Score ==null)
+            <tr class="warning">
+                <td>@(code++)</td>
+                <td>@item.Class.ClassName</td>
+                <td>@item.Stu_Name</td>
+                <td>@item.Stu_Namber</td>
+                <td>@item.Stu_Sex</td>
+
+                @*<td><a href="~/Student/LookStu?id=@item.StudentID" class="btn btn-success">查看</a></td>*@
+                @foreach (var item1 in item.Grade)
                 {
-                    <td>0</td>
+                    if (item1.Stu_Score == null)
+                    {
+                        <td>0</td>
+                    }
+                    else
+                    {
+                        <td>@item1.Stu_Score</td>
+
+                    }
+
+                    @*<td>@item1.Course.SchoolYear</td>*@
                 }
-                else
-                {
-                    <td>@item1.Stu_Score</td>
 
-                }
+                @*<td>@item.Stu_Sex</td>
+                    <td>@item.IDCard</td>
+                    <td>@item.Nation</td>
+                    <td>@item.NativePlace</td>
+                    <td>@item.PoliticsStatus</td>
 
-                @*<td>@item1.Course.SchoolYear</td>*@
-            }
+                    <td>@item.Phone</td>
+                    <td>@item.EnrollmentYear</td>
 
-            @*<td>@item.Stu_Sex</td>
-        <td>@item.IDCard</td>
-        <td>@item.Nation</td>
-        <td>@item.NativePlace</td>
-        <td>@item.PoliticsStatus</td>
+                    <td>@item.SchoolRoll</td>
+                    @if (item.SchoolRoll == "1")
+                    {
+                        <td>正常</td>
+                    }
+                    else if (item.SchoolRoll == "0")
+                    {
+                        <td>退学</td>
+                    }
+                    else
+                    {
+                        <td>休学</td>
+                    }
+                    <td>@item.Class.ClassName</td>*@
 
-        <td>@item.Phone</td>
-        <td>@item.EnrollmentYear</td>
-
-        <td>@item.SchoolRoll</td>
-        @if (item.SchoolRoll == "1")
-        {
-            <td>正常</td>
-        }
-        else if (item.SchoolRoll == "0")
-        {
-            <td>退学</td>
-        }
-        else
-        {
-            <td>休学</td>
-        }
-        <td>@item.Class.ClassName</td>*@
-
-        </tr>
+            </tr>
         }
     </tbody>
 
 </table>
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 2, 4, 5, 10, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option value="/Student/Index?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Student/Index?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Student/Index?name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/Index?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (ViewBag.pageIndex < ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/Index?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Student/Index?name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+

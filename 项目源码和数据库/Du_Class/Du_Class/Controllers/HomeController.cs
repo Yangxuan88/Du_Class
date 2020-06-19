@@ -14,7 +14,7 @@ namespace Du_Class.Controllers
 
         public ActionResult Index()
         {
-            SMS_Code.SendSms("18374538463", 2, 88888);
+            //SMS_Code.SendSms("18374538463", 2, 88888);
             return View();
         }
 

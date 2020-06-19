@@ -21,28 +21,25 @@ namespace Du_Class.Controllers
         /// 模糊查询学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuInfo(string a_test,string name = "",int pageIndex = 1, int pageCount = 4, int departmentId = 0)
+        public ActionResult StuInfo(string name = "",int pageIndex = 1, int pageCount = 10)
         {
             List<Teacher> tea = db.Teacher.ToList();
             ViewBag.tea = tea;
 
-            List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == ""||p.Class.ClassName=="2018173801")).ToList();
+            //List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
         ViewBag.Name = name;
 
             List<Class> cla = db.Class.ToList();
        
             ViewBag.cla = cla;
-
-            //Class c = db.Class.Find(a_test);
-            //ViewBag.c = c;
-
             //总行数
-            int totalCount = db.Student.OrderBy(p => p.StudentID).Where(a => (departmentId == 0 || a.StudentID == departmentId)).ToList().Count();
+            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
      
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Student> use = db.Student.OrderBy(p => p.StudentID).Where(a => (departmentId == 0 || a.StudentID == departmentId)).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+        
             ViewBag.name = name;
             ViewBag.pageIndex = pageIndex;
             ViewBag.pageCount = pageCount;
@@ -51,6 +48,24 @@ namespace Du_Class.Controllers
 
             return View(stu);
         }
+
+
+        /// <summary>
+        /// 导出excel
+        /// </summary>
+        /// <returns></returns>
+        public FileContentResult ExportToExcel(List<Student> student)
+        {
+            student = db.Student.Where(p=>p.Class.ClassName=="2018173802").ToList();
+            string[] columns = { "班级", "学号", "姓名", "性别" };
+            byte[] filecontent = ExcelExportHelper.ExportExcel(student, "", false, columns);
+            return File(filecontent, ExcelExportHelper.ExcelContentType, "MyStudent.xlsx");
+        }
+
+
+
+
+
 
         /// <summary>
         /// 批量删除
@@ -79,18 +94,18 @@ namespace Du_Class.Controllers
         /// 编辑学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuEdit(string name = "", int pageIndex = 1, int pageCount = 4, int departmentId = 0)
+        public ActionResult StuEdit(string name = "", int pageIndex = 1, int pageCount = 10)
         {
 
-            List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
+            //List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
             ViewBag.Name = name;
             //总行数
-            int totalCount = db.Student.OrderBy(p => p.StudentID).Where(a => (departmentId == 0 || a.StudentID == departmentId)).ToList().Count();
+            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
 
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Student> use = db.Student.OrderBy(p => p.StudentID).Where(a => (departmentId == 0 || a.StudentID == departmentId)).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.name = name;
             ViewBag.pageIndex = pageIndex;
             ViewBag.pageCount = pageCount;
@@ -126,10 +141,13 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult StuDelete(int? id) {
 
-           var student=db.Student.Find(id);                     
+           
+               var student=db.Student.Find(id);                     
             db.Student.Remove(student);
             db.SaveChanges();
             return RedirectToAction("StuEdit");
+         
+        
         }
 
         /// <summary>
@@ -211,7 +229,6 @@ namespace Du_Class.Controllers
 
             return RedirectToAction("StuInfo");
         }
-
 
     }
 }

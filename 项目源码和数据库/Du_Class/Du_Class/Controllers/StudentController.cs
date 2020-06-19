@@ -17,15 +17,29 @@ namespace Du_Class.Controllers
         /// 查看学生成绩
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(string name = "")
+        public ActionResult Index(string name = "",int pageIndex = 1, int pageCount = 10)
         {
            
-            List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+            //List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
             List<Class> cla = db.Class.ToList();
             ViewBag.CAL=cla;
             ViewBag.Name = name;
             List<Course> course = db.Course.ToList();
             ViewBag.course = course;
+
+            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
+            //总页数
+            double totalPage = Math.Ceiling((double)totalCount / pageCount);
+
+            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            ViewBag.name = name;
+            ViewBag.name = name;
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.pageCount = pageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.totalPage = totalPage;
+
             return View(stu);
         }
 
@@ -92,15 +106,28 @@ namespace Du_Class.Controllers
         /// 修改学生成绩
         /// </summary>
         /// <returns></returns>
-        public ActionResult EditStuGrade(string name="")
+        public ActionResult EditStuGrade(string name="", int pageIndex = 1, int pageCount = 10)
         {
-            List<Student> stu = db.Student.Where(p => p.Stu_Name.Contains(name) || p.Stu_Name == "").ToList();
+          
       
             ViewBag.Name = name;
             List<Course> course = db.Course.ToList();
             ViewBag.course = course;
             List<Grade> grade = db.Grade.ToList();
             ViewBag.grade = grade;
+            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
+            //总页数
+            double totalPage = Math.Ceiling((double)totalCount / pageCount);
+
+            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            ViewBag.name = name;
+            ViewBag.name = name;
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.pageCount = pageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.totalPage = totalPage;
+
             return View(stu);
         }
 
@@ -129,12 +156,13 @@ namespace Du_Class.Controllers
             ViewBag.stu = stu;
             List<Grade> grade = db.Grade.ToList();
             ViewBag.grade = grade;
+
             return View();
           }
         [HttpPost]
         public ActionResult EditGrade(Grade grade)
         {
-         
+               
                 db.Entry(grade).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
           
