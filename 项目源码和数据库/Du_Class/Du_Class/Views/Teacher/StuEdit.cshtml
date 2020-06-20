@@ -43,7 +43,6 @@
             <td>手机号</td>
             <td>入学年份</td>
             <td>学籍状态</td>
-
             <td>照片</td>
             <td>操作</td>
         </tr>
@@ -51,41 +50,73 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="warning">
-                <td><input type="checkbox" name="sub" value="@item.StudentID" /></td>
-                <td>@(code++)</td>
-                <td>@item.Class.ClassName</td>
-                <td>@item.Stu_Namber</td>
-                <td>@item.Stu_Name</td>
-                <td>@item.Stu_Sex</td>
-                <td>@item.IDCard</td>
-                <td>@item.Nation</td>
-                <td>@item.NativePlace</td>
-                <td>@item.PoliticsStatus</td>
+        <tr class="warning">
+            <td><input type="checkbox" name="sub" value="@item.StudentID" /></td>
+            <td>@(code++)</td>
+            <td>@item.Class.ClassName</td>
+            <td>@item.Stu_Namber</td>
+            <td>@item.Stu_Name</td>
+            @*<td>@item.Stu_Sex</td>*@
+            @if (item.Stu_Sex == "0")
+            {
+                <td>男</td>
+            }
+            else
+            {
+                <td>女</td>
+            }
+            <td>@item.IDCard</td>
+          @if(item.Nation=="0")
+          {
+              <td>汉族</td>
+          }
+          else if (item.Nation=="1")
+          {
+              <td>壮族</td>
+          }
+          else
+          {
+              <td>维吾尔族</td>
+          }
 
-                <td>@item.Phone</td>
-                <td>@item.EnrollmentYear</td>
+            <td>@item.NativePlace</td>
+            @if (item.PoliticsStatus == "0")
+            {
+                <td>共青团员</td>
+            }
+            else if (item.PoliticsStatus == "1")
+            {
+                <td>共产党员</td>
+            }
+            else
+            {
 
-                @if (item.SchoolRoll == "1")
-                {
-                    <td>正常</td>
-                }
-                else if (item.SchoolRoll == "0")
-                {
-                    <td>退学</td>
-                }
-                else
-                {
-                    <td>休学</td>
-                }
-                <td><img src="~/Images/@item.Stu_Photo" width="50" height="50" /></td>
+                <td>其它</td>
+            }
 
-                <td>
-                    <a href="~/Teacher/StuDelete?id=@item.StudentID" class="btn btn-danger" onclick="return confirm('您确定要删除吗？')">删除</a>
-                    <a href="~/Teacher/StuAlter?id=@item.StudentID" class="btn btn-primary">修改</a>
-                </td>
+            <td>@item.Phone</td>
+            <td>@item.EnrollmentYear</td>
 
-            </tr>
+            @if (item.SchoolRoll == "1")
+            {
+                <td>正常</td>
+            }
+            else if (item.SchoolRoll == "0")
+            {
+                <td>退学</td>
+            }
+            else
+            {
+                <td>休学</td>
+            }
+            <td><img src="~/Images/@item.Stu_Photo" width="50" height="50" /></td>
+
+            <td>
+                @*<a href="~/Teacher/StuDelete?id=@item.StudentID" class="btn btn-danger" onclick="return confirm('您确定要删除吗？')">删除</a>*@
+                <a href="~/Teacher/StuAlter?id=@item.StudentID" class="btn btn-primary">修改</a>
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>
@@ -96,7 +127,7 @@
         <label style="color:black;">总共 @ViewBag.totalCount 行</label>
         <select onchange="window.location = this.value;">
             @{
-                int[] count = new[] { 2, 4, 5, 10, 15 };
+                   int[] count = new[] { 2, 5, 8, 12, 15 };
             }
             @foreach (var item in count)
             {

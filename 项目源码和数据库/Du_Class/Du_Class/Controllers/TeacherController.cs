@@ -17,11 +17,14 @@ namespace Du_Class.Controllers
             return View();
         }
 
+
+
+
         /// <summary>
         /// 模糊查询学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuInfo(string name = "",int pageIndex = 1, int pageCount = 10)
+        public ActionResult StuInfo(string name = "",int pageIndex = 1, int pageCount = 5)
         {
             List<Teacher> tea = db.Teacher.ToList();
             ViewBag.tea = tea;
@@ -62,9 +65,21 @@ namespace Du_Class.Controllers
             return File(filecontent, ExcelExportHelper.ExcelContentType, "MyStudent.xlsx");
         }
 
+        /// <summary>
+        /// 用例图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Tu()
+        {
+            var stu = db.Student.ToList();
+            return View(stu);
+        }
 
-
-
+        public ActionResult Picture()
+        {
+            var stu = db.Student.ToList();
+            return View(stu);
+        }
 
 
         /// <summary>
@@ -94,7 +109,7 @@ namespace Du_Class.Controllers
         /// 编辑学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuEdit(string name = "", int pageIndex = 1, int pageCount = 10)
+        public ActionResult StuEdit(string name = "", int pageIndex = 1, int pageCount = 5)
         {
 
             //List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
@@ -139,15 +154,22 @@ namespace Du_Class.Controllers
         /// 删除学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuDelete(int? id) {
-
-           
-               var student=db.Student.Find(id);                     
-            db.Student.Remove(student);
-            db.SaveChanges();
-            return RedirectToAction("StuEdit");
-         
-        
+        public ActionResult StuDelete(int? id)
+        { 
+            var student=db.Student.Find(id);
+            foreach (var item in student.Grade)
+            {
+                if(item.Stu_Score!=null)
+                {
+                    return Content("<script>alert('此学生有成绩不可删除！');history.go(-1)</script>");
+                }
+                else
+                {
+                    db.Student.Remove(student);
+                    db.SaveChanges();
+                   
+                }
+            }     return RedirectToAction("StuAlter");
         }
 
         /// <summary>
@@ -203,7 +225,7 @@ namespace Du_Class.Controllers
 
 
         [HttpPost]
-        public ActionResult AddStu(Student stu, HttpPostedFileBase Photo)
+        public ActionResult AddStu(Student stu, HttpPostedFileBase Photo,string Stu_Namber,string IDCard,string Phone)
         {
             //处理图片
             if (Photo != null)
@@ -222,14 +244,31 @@ namespace Du_Class.Controllers
                 }
 
             }
+            //stu.Stu_Namber = Stu_Namber;
+            //stu.IDCard = IDCard;
+            //stu.Phone = Phone;
+                //Where(p => p.Stu_Namber == Stu_Namber && p.IDCard == IDCard && p.Phone == Phone).FirstOrDefault();
+           //if (stu.Stu_Namber!=Stu_Namber && stu.IDCard!=IDCard && stu.Phone!=Phone)
+           // {
+                db.Student.Add(stu);
+                db.SaveChanges();
+                return RedirectToAction("StuInfo");
+            //}
+            //else
+            //{
+            //    return Content("<script>alert('学号、身份证、手机号具有唯一性，请重新填写！');history.go(-1)</script>");
+            //}
 
-
-            db.Student.Add(stu);
-            db.SaveChanges();
-
-            return RedirectToAction("StuInfo");
+           
         }
 
+
+        public ActionResult Course()
+        {
+            List<Class> cla = db.Class.ToList();
+            ViewBag.CAL = cla;
+            return View();
+        }
     }
 }
 

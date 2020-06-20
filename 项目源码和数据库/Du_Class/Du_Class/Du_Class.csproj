@@ -144,6 +144,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +190,10 @@
     <Compile Include="SMS\SMS_Code.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-1.1.0.css" />
+    <Content Include="Content\bootstrap-1.1.0.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -312,7 +317,10 @@
       <DependentUpon>Du_Class.edmx</DependentUpon>
       <LastGenOutput>Du_Class.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\Code.js" />
+    <Content Include="Scripts\Echarts.js" />
     <Content Include="Scripts\front.js" />
     <Content Include="Content\style.default.css" />
     <Content Include="favicon.ico" />
@@ -348,6 +356,10 @@
     <Content Include="Scripts\layui.all.js" />
     <Content Include="Scripts\layui.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -388,6 +400,11 @@
     <Content Include="Views\Student\EditGrade.cshtml" />
     <Content Include="Views\StudentInfo\Detail.cshtml" />
     <Content Include="Views\StudentInfo\EditPwd.cshtml" />
+    <Content Include="Views\StudentInfo\StuGradeInfo.cshtml" />
+    <Content Include="Views\Teacher\Course.cshtml" />
+    <Content Include="Views\Teacher\Tu.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
+    <Content Include="Views\Teacher\Picture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

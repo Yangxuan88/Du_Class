@@ -45,54 +45,61 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="warning">
-                <td>@(code++)</td>
-                <td>@item.Class.ClassName</td>
-                <td>@item.Stu_Name</td>
-                <td>@item.Stu_Namber</td>
-                <td>@item.Stu_Sex</td>
+        <tr class="warning">
+            <td>@(code++)</td>
+            <td>@item.Class.ClassName</td>
+            <td>@item.Stu_Name</td>
+            <td>@item.Stu_Namber</td>
+            @if (item.Stu_Sex == "0")
+            {
+                <td>男</td>
+            }
+            else
+            {
+                <td>女</td>
+            }
 
-                @*<td><a href="~/Student/LookStu?id=@item.StudentID" class="btn btn-success">查看</a></td>*@
-                @foreach (var item1 in item.Grade)
+            @*<td><a href="~/Student/LookStu?id=@item.StudentID" class="btn btn-success">查看</a></td>*@
+            @foreach (var item1 in item.Grade)
+            {
+                if (item1.Stu_Score == null)
                 {
-                    if (item1.Stu_Score == null)
-                    {
-                        <td>0</td>
-                    }
-                    else
-                    {
-                        <td>@item1.Stu_Score</td>
+                    <td>0</td>
+                }
+                else
+                {
+                    <td>@item1.Stu_Score</td>
 
-                    }
-
-                    @*<td>@item1.Course.SchoolYear</td>*@
                 }
 
-                @*<td>@item.Stu_Sex</td>
-                    <td>@item.IDCard</td>
-                    <td>@item.Nation</td>
-                    <td>@item.NativePlace</td>
-                    <td>@item.PoliticsStatus</td>
+                @*<td>@item1.Course.SchoolYear</td>*@
+            }
 
-                    <td>@item.Phone</td>
-                    <td>@item.EnrollmentYear</td>
+            @*<td>@item.Stu_Sex</td>
+        <td>@item.IDCard</td>
+        <td>@item.Nation</td>
+        <td>@item.NativePlace</td>
+        <td>@item.PoliticsStatus</td>
 
-                    <td>@item.SchoolRoll</td>
-                    @if (item.SchoolRoll == "1")
-                    {
-                        <td>正常</td>
-                    }
-                    else if (item.SchoolRoll == "0")
-                    {
-                        <td>退学</td>
-                    }
-                    else
-                    {
-                        <td>休学</td>
-                    }
-                    <td>@item.Class.ClassName</td>*@
+        <td>@item.Phone</td>
+        <td>@item.EnrollmentYear</td>
 
-            </tr>
+        <td>@item.SchoolRoll</td>
+        @if (item.SchoolRoll == "1")
+        {
+            <td>正常</td>
+        }
+        else if (item.SchoolRoll == "0")
+        {
+            <td>退学</td>
+        }
+        else
+        {
+            <td>休学</td>
+        }
+        <td>@item.Class.ClassName</td>*@
+
+        </tr>
         }
     </tbody>
 

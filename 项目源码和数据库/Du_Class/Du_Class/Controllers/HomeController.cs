@@ -70,6 +70,8 @@ namespace Du_Class.Controllers
 
             var t = db.Student.FirstOrDefault(x => x.Stu_Namber == Stu_Namber && x.Stu_Password == Stu_Password);
             Session["Student"] = t;
+            Session["name"] = Stu_Namber;
+            Session["pwd"] = Stu_Password;
             if (Stu_Namber != "" && Stu_Password != "" && code == ValidateCode)
             {
                 if (t == null)

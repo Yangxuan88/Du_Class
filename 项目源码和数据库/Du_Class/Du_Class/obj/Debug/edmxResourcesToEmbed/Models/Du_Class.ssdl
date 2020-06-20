@@ -47,7 +47,7 @@
     <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Stu_Namber" Type="nvarchar" MaxLength="20" />
     <Property Name="Stu_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Stu_Sex" Type="char" MaxLength="10" />
+    <Property Name="Stu_Sex" Type="nvarchar" MaxLength="50" />
     <Property Name="Stu_Photo" Type="nvarchar" MaxLength="50" />
     <Property Name="Stu_Password" Type="nvarchar" MaxLength="50" />
     <Property Name="IDCard" Type="nvarchar" MaxLength="18" />

@@ -25,7 +25,7 @@
         <label for="Stu_Name">姓名:</label>
         <input type="text" value="@Model.Stu_Name" name="Stu_Name" placeholder="请输入姓名" class="form-control" />
     </div>
-
+    <input type="hidden" value="123456" name="Stu_Passwrod" class="form-control" />
     <div class="form-group col-lg-6">
         <label for="Stu_Namber">学号:</label>
         @*<input type="radio" value="true" name="Sex" checked />男
@@ -35,16 +35,23 @@
 
     <div class="form-group col-lg-6">
         <label for="Stu_Sex">性别:</label>
-        <input type="text" value="@Model.Stu_Sex" name="Stu_Sex" placeholder="请输入性别" class="form-control" />
+        @*<input type="text" value="@Model.Stu_Sex" name="Stu_Sex" placeholder="请输入性别" class="form-control" />*@
+        <input type="radio" value="0" name="Stu_Sex" checked />男
+        <input type="radio" value="1" name="Stu_Sex" />女
     </div>
     <div class="form-group col-lg-6">
         <label for="IDCard">身份证:</label>
-        <input type="text" value="@Model.IDCard" name="IDCard" placeholder="请输入身份证" class="form-control" onblur="isCardNo(this.value)"/>
+        <input type="text" value="@Model.IDCard" name="IDCard" placeholder="请输入身份证" class="form-control" onblur="isCardNo(this.value)" />
     </div>
 
     <div class="form-group col-lg-6">
         <label for="Nation">民族:</label>
-        <input type="text" value="@Model.Nation" name="Nation" placeholder="请输入民族" class="form-control" />
+
+        <select class="form-control" name="Nation">
+            <option value="0" selected>汉族</option>
+            <option value="1">壮族</option>
+            <option value="2">维吾尔族</option>
+        </select>
     </div>
     <div class="form-group col-lg-6">
         <label for="NativePlace">籍贯:</label>
@@ -52,7 +59,12 @@
     </div>
     <div class="form-group col-lg-6">
         <label for="PoliticsStatus">政治面貌:</label>
-        <input type="text" value="@Model.PoliticsStatus" name="PoliticsStatus" placeholder="请输入政治面貌" class="form-control" />
+        @*<input type="text" value="@Model.PoliticsStatus" name="PoliticsStatus" placeholder="请输入政治面貌" class="form-control" />*@
+        <select class="form-control" name="PoliticsStatus">
+            <option value="0" selected>共青团员</option>
+            <option value="1"> 共产党员</option>
+            <option value="2">其它</option>
+        </select>
     </div>
     <div class="form-group col-lg-6">
         <label for="Phone">手机号:</label>
@@ -67,7 +79,7 @@
             }
         </select>
     </div>
-
+    <input type="hidden" value="@Model.Stu_Password" name="Stu_Password" class="form-control" />
     <div class="form-group col-lg-6">
         <label for="EnrollmentYear">入学年份:</label>
         <select class="form-control" name="EnrollmentYear">

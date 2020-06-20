@@ -55,7 +55,7 @@
     <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Stu_Namber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Stu_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Stu_Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Stu_Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Stu_Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Stu_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IDCard" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
