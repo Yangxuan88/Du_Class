@@ -57,9 +57,9 @@ namespace Du_Class.Controllers
         /// 导出excel
         /// </summary>
         /// <returns></returns>
-        public FileContentResult ExportToExcel(List<Student> student)
+        public FileContentResult ExportToExcel()
         {
-            student = db.Student.Where(p=>p.Class.ClassName=="2018173802").ToList();
+           List<Student> student = db.Student.ToList();
             string[] columns = { "班级", "学号", "姓名", "性别" };
             byte[] filecontent = ExcelExportHelper.ExportExcel(student, "", false, columns);
             return File(filecontent, ExcelExportHelper.ExcelContentType, "MyStudent.xlsx");
@@ -262,13 +262,80 @@ namespace Du_Class.Controllers
            
         }
 
-
+        /// <summary>
+        /// 添加课程
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Course()
         {
             List<Class> cla = db.Class.ToList();
             ViewBag.CAL = cla;
             return View();
         }
+
+        [HttpPost]
+       public ActionResult AddCourse(Course course)
+        {
+            db.Course.Add(course);
+            db.SaveChanges();
+            return RedirectToAction("Index","Course");
+        }
+
+
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditPwd()
+        {
+            Teacher tea = Session["Teacher"] as Teacher;
+
+            return View(tea);
+        }
+
+        [HttpPost]
+        public ActionResult EditPwd(string NewPwd, string confirmPwd, string TeacherPassword)
+        {
+            var name = Session["TeacherName"].ToString();
+            var pwd = Session["Teapwd"].ToString();
+            var tea = db.Teacher.FirstOrDefault(p => p.TeacherName == name && p.TeacherPassword == pwd);
+            if (TeacherPassword == tea.TeacherPassword)
+            {
+                if (NewPwd != TeacherPassword)
+                {
+                    if (NewPwd == confirmPwd)
+                    {
+                        tea.TeacherPassword = NewPwd;
+                        db.Entry(tea).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        return Content("<script>alert('修改成功！请重新登录');location.href='/Home/LoginTeacher'</script>");
+
+                    }
+                    else
+                    {
+                        return Content("<script>alert('两次输入密码不一致！');history.go(-1)</script>");
+                    }
+
+                }
+                else
+                {
+                    return Content("<script>alert('修改的密码不能与原密码相同！');history.go(-1)</script>");
+                }
+            }
+            else
+            {
+                return Content("<script>alert('原密码不一致！');history.go(-1)</script>");
+            }
+
+
+        }
+
+
+
+
+
+
     }
 }
 

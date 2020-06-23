@@ -270,3 +270,5 @@ F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据�
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.dll
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.xml
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.csprojAssemblyReference.cache
+F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.dll
+F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.xml

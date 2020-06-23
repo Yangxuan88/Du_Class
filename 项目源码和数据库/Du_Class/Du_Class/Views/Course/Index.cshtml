@@ -23,12 +23,13 @@
     <thead>
         <tr class="active">
             <td>课程编号</td>
-   
-            <td>学年</td>
-            <td>学期</td>
+
             <td>课程名</td>
+            <td>班级</td>
             <td>授课老师</td>
             <td>上课地点</td>
+            <td>上课时间</td>
+            <td>上课时间</td>
             <td>辅导员</td>
             <td>操作</td>
         </tr>
@@ -38,15 +39,14 @@
         {
         <tr class="warning">
             <td>@(code++)</td>
-
-
-            <td>@item.SchoolYear</td>
-            <td>@item.Term</td>
+          
             <td>@item.CourseName</td>
+            <td>@item.Class.ClassName</td>
             <td>@item.Tea_Name</td>
             <td>@item.ClassRoom</td>
-
-            <td>@item.Teacher.TeacherName</td>
+            <td>@(item.SchoolTime)</td>
+            <td>@item.NewTime</td>
+            <td>@item.Class.Teacher.TeacherName</td>
             <td>
                 <a href="" class="btn btn-danger">删除</a>
                 <a href="" class="btn btn-primary">修改</a>

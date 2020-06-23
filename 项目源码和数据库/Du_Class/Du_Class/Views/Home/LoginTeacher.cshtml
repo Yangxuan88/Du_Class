@@ -55,18 +55,18 @@
 
     <script type="text/javascript">
 
-        //$("#RegisterForm").validate({
-        //    rules: {
-        //        TeacherName: { required: true, maxlength: 30 },
-        //        PassWord: { required: true, checkPwd: true },
-        //       ValidateCode:{ required: true, checkPwd: true }
-        //    },
-        //    messages: {
-        //        UserName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
-        //        Password: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
-        //        ValidateCode: { required: "验证码必填！" }
-        //    }
-        //})
+        $("#RegisterForm").validate({
+            rules: {
+                TeacherName: { required: true, maxlength: 30 },
+                PassWord: { required: true, checkPwd: true },
+               ValidateCode:{ required: true, checkPwd: true }
+            },
+            messages: {
+                UserName: { required: "账号必填", maxlength: "账号输入内容不能超过30字" },
+                Password: { required: "密码必填", checkPwd: "密码组成：6-12位的字母数字组成" },
+                ValidateCode: { required: "验证码必填！" }
+            }
+        })
 
         $("#loginFrom").validate({
             rules: {

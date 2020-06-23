@@ -405,6 +405,7 @@
     <Content Include="Views\Teacher\Tu.cshtml" />
     <Content Include="Views\test\Index.cshtml" />
     <Content Include="Views\Teacher\Picture.cshtml" />
+    <Content Include="Views\Teacher\EditPwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

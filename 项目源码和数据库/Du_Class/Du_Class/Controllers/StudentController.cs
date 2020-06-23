@@ -136,14 +136,24 @@ namespace Du_Class.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //public ActionResult StuGradeDelete(int? id)
-        //{
-        //    var stu = db.Student.Find(id);
-
-
-        //    db.SaveChanges();
-        //    return View();
-        //}
+        public ActionResult DeleteGrade(int? id)
+        { 
+            var stu = db.Student.Find(id);
+            var grade = db.Grade.Where(p => p.StudentID == stu.StudentID).FirstOrDefault();
+            if(grade!=null)
+            {  
+                    db.Grade.Remove(grade);
+                    db.SaveChanges();
+               
+                //return Content("<script>alert('删除成功！');history.go(-1)</script>");
+                return RedirectToAction("EditStuGrade");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败！');history.go(-1)</script>");
+            }
+           
+        }
 
         /// <summary>
         /// 修改成绩
@@ -154,7 +164,7 @@ namespace Du_Class.Controllers
         {
             Student stu = db.Student.Find(id);
             ViewBag.stu = stu;
-            List<Grade> grade = db.Grade.ToList();
+            List<Grade> grade = db.Grade.Where(p => p.StudentID == stu.StudentID).ToList();
             ViewBag.grade = grade;
 
             return View();
