@@ -330,12 +330,32 @@ namespace Du_Class.Controllers
 
 
         }
+        [ValidateInput(false)]
+        /// <summary>
+        /// 发布信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddInfo()
+        {
+            
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AddInfo(News news)
+        {
+        
+               db.News.Add(news);
+               db.SaveChanges();
+               return Content("<script>alert('发布成功');history.go(-1)</script>");
+         
+        }
 
-
-
-
-
+        public ActionResult NewsInfo()
+        {
+            List<News> news = db.News.ToList();
+            return View(news);
+        }
     }
 }
 

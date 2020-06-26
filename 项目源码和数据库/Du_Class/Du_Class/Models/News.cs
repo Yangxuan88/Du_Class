@@ -11,15 +11,15 @@ namespace Du_Class.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class News
     {
         public int NewsID { get; set; }
+        [AllowHtml]
         public string Title { get; set; }
+        [AllowHtml]
         public string News_content { get; set; }
         public Nullable<System.DateTime> Publish_time { get; set; }
-        public int TeacherID { get; set; }
-    
-        public virtual Teacher Teacher { get; set; }
     }
 }

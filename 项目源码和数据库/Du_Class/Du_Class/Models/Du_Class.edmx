@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Du_ClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Du_ClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Class_ID" />
@@ -43,7 +43,6 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="News_content" Type="nvarchar" MaxLength="1000" />
           <Property Name="Publish_time" Type="datetime" />
-          <Property Name="TeacherID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -132,18 +131,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_News_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="News" Type="Self.News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="TeacherID" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="TeacherID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Student_Class">
           <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -180,16 +167,13 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
-          <AssociationSet Name="FK_News_Teacher" Association="Self.FK_News_Teacher">
-            <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="News" EntitySet="News" />
-          </AssociationSet>
           <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
             <End Role="Class" EntitySet="Class" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Du_ClassModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -238,8 +222,6 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="News_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Publish_time" Type="DateTime" Precision="3" />
-          <Property Name="TeacherID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_News_Teacher" FromRole="News" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -282,7 +264,6 @@
           <Property Name="TeacherPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Tea_Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Teacher" FromRole="Teacher" ToRole="Class" />
-          <NavigationProperty Name="News" Relationship="Self.FK_News_Teacher" FromRole="Teacher" ToRole="News" />
         </EntityType>
         <Association Name="FK_Class_Teacher">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
@@ -344,18 +325,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_News_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="News" Type="Self.News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="TeacherID" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="TeacherID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Du_ClassEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Class" EntityType="Self.Class" />
           <EntitySet Name="Course" EntityType="Self.Course" />
@@ -383,10 +352,6 @@
           <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Grade" EntitySet="Grade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_News_Teacher" Association="Self.FK_News_Teacher">
-            <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="News" EntitySet="News" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -435,7 +400,6 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="News_content" ColumnName="News_content" />
                 <ScalarProperty Name="Publish_time" ColumnName="Publish_time" />
-                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

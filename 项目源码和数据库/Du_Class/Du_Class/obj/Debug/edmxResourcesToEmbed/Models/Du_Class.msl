@@ -41,7 +41,6 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="News_content" ColumnName="News_content" />
           <ScalarProperty Name="Publish_time" ColumnName="Publish_time" />
-          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
