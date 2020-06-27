@@ -244,21 +244,10 @@ namespace Du_Class.Controllers
                 }
 
             }
-            //stu.Stu_Namber = Stu_Namber;
-            //stu.IDCard = IDCard;
-            //stu.Phone = Phone;
-                //Where(p => p.Stu_Namber == Stu_Namber && p.IDCard == IDCard && p.Phone == Phone).FirstOrDefault();
-           //if (stu.Stu_Namber!=Stu_Namber && stu.IDCard!=IDCard && stu.Phone!=Phone)
-           // {
+            
                 db.Student.Add(stu);
                 db.SaveChanges();
-                return RedirectToAction("StuInfo");
-            //}
-            //else
-            //{
-            //    return Content("<script>alert('学号、身份证、手机号具有唯一性，请重新填写！');history.go(-1)</script>");
-            //}
-
+                return RedirectToAction("StuInfo");        
            
         }
 
@@ -344,13 +333,17 @@ namespace Du_Class.Controllers
         [HttpPost]
         public ActionResult AddInfo(News news)
         {
-        
+         
+               news.Publish_time = DateTime.Now;
                db.News.Add(news);
                db.SaveChanges();
-               return Content("<script>alert('发布成功');history.go(-1)</script>");
-         
-        }
+               return Content("<script>alert('发布成功');location.href='/Teacher/NewsInfo'</script>");
 
+        }
+        /// <summary>
+        /// 查看发布通知
+        /// </summary>
+        /// <returns></returns>
         public ActionResult NewsInfo()
         {
             List<News> news = db.News.ToList();
