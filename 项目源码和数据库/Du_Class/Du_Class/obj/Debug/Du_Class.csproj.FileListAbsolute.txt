@@ -271,4 +271,13 @@ G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据�
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.xml
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.dll
 F:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\EPPlus.xml
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\BouncyCastle.Crypto.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\ICSharpCode.SharpZipLib.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\NPOI.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\NPOI.OOXML.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\NPOI.OpenXml4Net.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\NPOI.OpenXmlFormats.dll
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\BouncyCastle.Crypto.xml
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\ICSharpCode.SharpZipLib.pdb
+G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\bin\ICSharpCode.SharpZipLib.xml
 G:\大二下学期\个人文件\毕业设计项目资料\项目源码和数据库\Du_Class\Du_Class\obj\Debug\Du_Class.csprojAssemblyReference.cache

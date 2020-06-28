@@ -59,9 +59,9 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public FileContentResult ExportToExcel()
         {
-           List<Student> student = db.Student.ToList();
-            string[] columns = { "班级", "学号", "姓名", "性别" };
-            byte[] filecontent = ExcelExportHelper.ExportExcel(student, "", false, columns);
+            List<Student> news = db.Student.ToList();
+            string[] columns = { "编号","学号","姓名","性别","照片","密码","身份证","民族","籍贯","政治面貌","手机号","入学年份","学籍状态" };
+            byte[] filecontent = ExcelExportHelper.ExportExcel(news, "", false, columns);
             return File(filecontent, ExcelExportHelper.ExcelContentType, "MyStudent.xlsx");
         }
 
@@ -330,6 +330,12 @@ namespace Du_Class.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 发布信息
+        /// </summary>
+        /// <param name="news"></param>
+        /// <returns></returns>
+     
         [HttpPost]
         public ActionResult AddInfo(News news)
         {
@@ -347,6 +353,16 @@ namespace Du_Class.Controllers
         public ActionResult NewsInfo()
         {
             List<News> news = db.News.ToList();
+            return View(news);
+        }
+
+        /// <summary>
+        /// 查看信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult NewsContent(int? id)
+        {
+            News news = db.News.Find(id);
             return View(news);
         }
     }
