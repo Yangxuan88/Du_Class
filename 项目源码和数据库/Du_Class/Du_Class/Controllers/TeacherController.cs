@@ -18,31 +18,30 @@ namespace Du_Class.Controllers
         }
 
 
-
-
         /// <summary>
         /// 模糊查询学生信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult StuInfo(string name = "",int pageIndex = 1, int pageCount = 5)
+        public ActionResult StuInfo(string name = "", int pageIndex = 1, int pageCount = 5)
         {
+            Teacher teacher = Session["Teacher"] as Teacher;
             List<Teacher> tea = db.Teacher.ToList();
             ViewBag.tea = tea;
 
             //List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
-        ViewBag.Name = name;
+            ViewBag.Name = name;
 
-            List<Class> cla = db.Class.ToList();
-       
+            List<Class> cla = db.Class.Where(p => p.TeacherID == teacher.TeacherID).ToList();
+
             ViewBag.cla = cla;
             //总行数
-            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
+            int totalCount = db.Student.OrderBy(p => p.StudentID).Where(p => p.Class.TeacherID == teacher.TeacherID).ToList().Count();
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
-     
+
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
-        
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Where(p=>p.Class.TeacherID==teacher.TeacherID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+
             ViewBag.name = name;
             ViewBag.pageIndex = pageIndex;
             ViewBag.pageCount = pageCount;
@@ -60,7 +59,7 @@ namespace Du_Class.Controllers
         public FileContentResult ExportToExcel()
         {
             List<Student> news = db.Student.ToList();
-            string[] columns = { "编号","学号","姓名","性别","照片","密码","身份证","民族","籍贯","政治面貌","手机号","入学年份","学籍状态" };
+            string[] columns = { "编号", "学号", "姓名", "性别", "照片", "密码", "身份证", "民族", "籍贯", "政治面貌", "手机号", "入学年份", "学籍状态" };
             byte[] filecontent = ExcelExportHelper.ExportExcel(news, "", false, columns);
             return File(filecontent, ExcelExportHelper.ExcelContentType, "MyStudent.xlsx");
         }
@@ -71,13 +70,19 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult Tu()
         {
-            var stu = db.Student.ToList();
+            Teacher tea = Session["Teacher"] as Teacher;
+            var stu = db.Student.Where(p=>p.Class.TeacherID==tea.TeacherID).ToList();
             return View(stu);
         }
-
+        /// <summary>
+        /// 显示用例图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Picture()
         {
-            var stu = db.Student.ToList();
+
+            Teacher tea = Session["Teacher"] as Teacher;
+            var stu = db.Student.Where(p => p.Class.TeacherID == tea.TeacherID).ToList();
             return View(stu);
         }
 
@@ -87,7 +92,7 @@ namespace Du_Class.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-       public ActionResult BatchDelete(string checkData)
+        public ActionResult BatchDelete(string checkData)
         {
             //string teas = checkData;
             //用数组接受数据
@@ -95,7 +100,7 @@ namespace Du_Class.Controllers
             teaID = checkData.Split(',');
             for (int i = 0; i < teaID.Length; i++)
             {
-                
+
                 int teaId = int.Parse(teaID[i]);
                 Student stu = db.Student.Find(teaId);
                 db.Student.Remove(stu);
@@ -111,16 +116,16 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult StuEdit(string name = "", int pageIndex = 1, int pageCount = 5)
         {
-
+            Teacher teacher = Session["Teacher"] as Teacher;
             //List<Student> stu = db.Student.Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).ToList();
             ViewBag.Name = name;
             //总行数
-            int totalCount = db.Student.OrderBy(p => p.StudentID).ToList().Count();
+            int totalCount = db.Student.OrderBy(p => p.StudentID).Where(p => p.Class.TeacherID == teacher.TeacherID).ToList().Count();
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
 
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            List<Student> stu = db.Student.OrderBy(p => p.StudentID).Where((p => p.Stu_Name.Contains(name) || p.Stu_Name == "")).Where(p => p.Class.TeacherID == teacher.TeacherID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.name = name;
             ViewBag.pageIndex = pageIndex;
             ViewBag.pageCount = pageCount;
@@ -131,23 +136,6 @@ namespace Du_Class.Controllers
 
         }
 
-        /// <summary>
-        /// 添加班级
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult TeaClass() {
-
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult TeaClass(Teacher tea,Class c)
-        //{
-        //    db.Teacher.Add(tea);
-        //    db.Class.Add(c);
-        //    db.SaveChanges();
-        //    return View();
-        //}
 
 
         /// <summary>
@@ -155,11 +143,11 @@ namespace Du_Class.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult StuDelete(int? id)
-        { 
-            var student=db.Student.Find(id);
+        {
+            var student = db.Student.Find(id);
             foreach (var item in student.Grade)
             {
-                if(item.Stu_Score!=null)
+                if (item.Stu_Score != null)
                 {
                     return Content("<script>alert('此学生有成绩不可删除！');history.go(-1)</script>");
                 }
@@ -167,9 +155,10 @@ namespace Du_Class.Controllers
                 {
                     db.Student.Remove(student);
                     db.SaveChanges();
-                   
+
                 }
-            }     return RedirectToAction("StuAlter");
+            }
+            return RedirectToAction("StuAlter");
         }
 
         /// <summary>
@@ -185,7 +174,7 @@ namespace Du_Class.Controllers
         }
 
         [HttpPost]
-        public ActionResult StuAlter(Student stu,HttpPostedFileBase EPhoto)
+        public ActionResult StuAlter(Student stu, HttpPostedFileBase EPhoto)
         {
             if (EPhoto != null)
             {
@@ -195,7 +184,7 @@ namespace Du_Class.Controllers
                 {
                     //保存到服务器中
                     EPhoto.SaveAs(Server.MapPath("~/Images/" + fileName));
-                  stu.Stu_Photo = fileName;
+                    stu.Stu_Photo = fileName;
                 }
                 else
                 {
@@ -218,14 +207,17 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult AddStu()
         {
-            List<Class> cla = db.Class.ToList();
+            Teacher tea = Session["Teacher"] as Teacher; 
+
+
+            List<Class> cla = db.Class.Where(p=>p.TeacherID==tea.TeacherID).ToList();
             ViewBag.CAL = cla;
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult AddStu(Student stu, HttpPostedFileBase Photo,string Stu_Namber,string IDCard,string Phone)
+        public ActionResult AddStu(Student stu, HttpPostedFileBase Photo)
         {
             //处理图片
             if (Photo != null)
@@ -244,12 +236,23 @@ namespace Du_Class.Controllers
                 }
 
             }
-            
+            //通过注册时间填写的账号去数据库中查找账号是否存在
+            Student student = db.Student.Where(p => p.Stu_Name == stu.Stu_Name).FirstOrDefault();
+            if (student == null)
+            {
                 db.Student.Add(stu);
                 db.SaveChanges();
-                return RedirectToAction("StuInfo");        
-           
+                return RedirectToAction("StuInfo");
+            }
+            else
+            {
+                //ModelState.AddModelError("", "该账号已存在");
+                //var de = db.Student.ToList();
+                //ViewBag.de = de;
+                return Content("<script >alert('该员工已存在');history.go(-1)</script >");
+            }
         }
+
 
         /// <summary>
         /// 添加课程
@@ -263,11 +266,11 @@ namespace Du_Class.Controllers
         }
 
         [HttpPost]
-       public ActionResult AddCourse(Course course)
+        public ActionResult AddCourse(Course course)
         {
             db.Course.Add(course);
             db.SaveChanges();
-            return RedirectToAction("Index","Course");
+            return RedirectToAction("Index", "Course");
         }
 
 
@@ -326,7 +329,7 @@ namespace Du_Class.Controllers
         /// <returns></returns>
         public ActionResult AddInfo()
         {
-            
+
             return View();
         }
 
@@ -335,26 +338,48 @@ namespace Du_Class.Controllers
         /// </summary>
         /// <param name="news"></param>
         /// <returns></returns>
-     
+
         [HttpPost]
         public ActionResult AddInfo(News news)
         {
-         
-               news.Publish_time = DateTime.Now;
-               db.News.Add(news);
-               db.SaveChanges();
-               return Content("<script>alert('发布成功');location.href='/Teacher/NewsInfo'</script>");
+            Teacher tea = Session["Teacher"] as Teacher;
+            if (news.TeacherID==tea.TeacherID) {
+                news.Publish_time = DateTime.Now;
+                db.News.Add(news);
+                db.SaveChanges();
+                return Content("<script>alert('发布成功');location.href='/Teacher/NewsInfo'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('发布失败');history.go(-1)</script>");
+            }
+       
 
         }
         /// <summary>
         /// 查看发布通知
         /// </summary>
         /// <returns></returns>
-        public ActionResult NewsInfo()
+        public ActionResult NewsInfo(string Title = "", int pageIndex = 1, int pageCount = 5)
         {
-            List<News> news = db.News.ToList();
-            return View(news);
-        }
+            Teacher tea = Session["Teacher"] as Teacher;
+               //List<News> news = db.News.ToList();
+                int totalCount = db.News.OrderBy(p => p.NewsID).Where(p=>p.TeacherID==tea.TeacherID).ToList().Count();
+                //总页数
+                double totalPage = Math.Ceiling((double)totalCount / pageCount);
+
+                //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+                List<News> news = db.News.OrderBy(p => p.NewsID).Where((p => p.Title.Contains(Title) || p.Title == "")).Where(p=>p.TeacherID==tea.TeacherID).Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+
+                ViewBag.Title = Title;
+                ViewBag.pageIndex = pageIndex;
+                ViewBag.pageCount = pageCount;
+                ViewBag.totalCount = totalCount;
+                ViewBag.totalPage = totalPage;
+
+                return View(news);
+            }
+  
 
         /// <summary>
         /// 查看信息

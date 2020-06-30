@@ -20,7 +20,9 @@ namespace Du_Class.Models
         public string Title { get; set; }
         [AllowHtml]
         public string News_content { get; set; }
-        [AllowHtml]
         public Nullable<System.DateTime> Publish_time { get; set; }
+        public int TeacherID { get; set; }
+    
+        public virtual Teacher Teacher { get; set; }
     }
 }

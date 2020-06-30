@@ -17,6 +17,7 @@
         <AssociationConnector Association="Du_ClassModel.FK_Student_Class" ManuallyRouted="false" />
         <AssociationConnector Association="Du_ClassModel.FK_Grade_Course" ManuallyRouted="false" />
         <AssociationConnector Association="Du_ClassModel.FK_Grade_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="Du_ClassModel.FK_News_Teacher" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

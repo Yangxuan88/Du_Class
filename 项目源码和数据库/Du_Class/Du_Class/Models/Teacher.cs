@@ -18,6 +18,7 @@ namespace Du_Class.Models
         public Teacher()
         {
             this.Class = new HashSet<Class>();
+            this.News = new HashSet<News>();
         }
     
         public int TeacherID { get; set; }
@@ -28,5 +29,7 @@ namespace Du_Class.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Class { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
     }
 }

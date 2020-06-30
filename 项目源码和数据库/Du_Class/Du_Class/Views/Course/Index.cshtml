@@ -16,6 +16,17 @@
     <li><a href="#">课程管理</a></li>
     <li class="active">添加课程</li>
 </ul>
+<div class="col-lg-8">
+</div>
+
+<div class="col-lg-4">
+    <form action="/Course/Index" method="post" class="form-inline">
+        <label for="Name">课程名称: </label>
+        <input type="text" name="name" id="CourseName" value="@ViewBag.name" class="form-control" placeholder="请输入课程名称" />
+        <input type="submit" value="查询" class="btn btn-success" />
+    </form>
+</div>
+
 
 
 <br />
@@ -23,13 +34,11 @@
     <thead>
         <tr class="active">
             <td>课程编号</td>
-
             <td>课程名</td>
             <td>班级</td>
             <td>授课老师</td>
             <td>上课地点</td>
             <td>开课时间</td>
-     
             <td>辅导员</td>
             <td>操作</td>
         </tr>
@@ -37,22 +46,84 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr class="warning">
-            <td>@(code++)</td>
-          
-            <td>@item.CourseName</td>
-            <td>@item.Class.ClassName</td>
-            <td>@item.Tea_Name</td>
-            <td>@item.ClassRoom</td>
-            <td> @string.Format("{0:yyyy年MM月dd日}",item.SchoolTime)</td>
- 
-            <td>@item.Class.Teacher.TeacherName</td>
-            <td>
-                <a href="" class="btn btn-danger">删除</a>
-                <a href="" class="btn btn-primary">修改</a>
-            </td>
+            <tr class="warning">
+                <td>@(code++)</td>
 
-        </tr>
+                <td>@item.CourseName</td>
+                <td>@item.Class.ClassName</td>
+                <td>@item.Tea_Name</td>
+                <td>@item.ClassRoom</td>
+                <td> @string.Format("{0:yyyy年MM月dd日}", item.SchoolTime)</td>
+
+                <td>@item.Class.Teacher.TeacherName</td>
+                <td>
+                    <a href="" class="btn btn-danger">删除</a>
+                    <a href="" class="btn btn-primary">修改</a>
+                </td>
+
+            </tr>
         }
     </tbody>
 </table>
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+
+                int[] count = new[] { 2, 5, 8, 12, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(@ViewBag.pageCount))
+                {
+                    <option value="/Course/Index?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Course/Index?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Course/Index?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (@ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Course/Index?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Course/Index?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Course/Index?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

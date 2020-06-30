@@ -38,6 +38,7 @@
     <Property Name="Title" Type="nvarchar" MaxLength="50" />
     <Property Name="News_content" Type="nvarchar" MaxLength="1000" />
     <Property Name="Publish_time" Type="datetime" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -126,6 +127,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_News_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Student_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -161,6 +174,10 @@
     <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Teacher" Association="Self.FK_News_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="News" EntitySet="News" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
       <End Role="Class" EntitySet="Class" />

@@ -37,6 +37,7 @@
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="Du_ClassModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
           <ScalarProperty Name="NewsID" ColumnName="NewsID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="News_content" ColumnName="News_content" />

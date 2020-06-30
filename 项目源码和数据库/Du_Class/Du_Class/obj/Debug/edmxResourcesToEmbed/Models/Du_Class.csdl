@@ -45,6 +45,8 @@
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="News_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="Publish_time" Type="DateTime" Precision="3" />
+    <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Teacher" Relationship="Du_ClassModel.FK_News_Teacher" FromRole="News" ToRole="Teacher" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -87,6 +89,7 @@
     <Property Name="TeacherPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Name="Tea_Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="Class" Relationship="Self.FK_Class_Teacher" FromRole="Teacher" ToRole="Class" />
+    <NavigationProperty Name="News" Relationship="Du_ClassModel.FK_News_Teacher" FromRole="Teacher" ToRole="News" />
   </EntityType>
   <Association Name="FK_Class_Teacher">
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
@@ -176,5 +179,21 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="Grade" EntitySet="Grade" />
     </AssociationSet>
+    <AssociationSet Name="FK_News_Teacher" Association="Du_ClassModel.FK_News_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_News_Teacher">
+    <End Type="Du_ClassModel.Teacher" Role="Teacher" Multiplicity="1" />
+    <End Type="Du_ClassModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

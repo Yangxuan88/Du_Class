@@ -686,6 +686,7 @@
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
     <Content Include="Scripts\Code.js" />
     <Content Include="Scripts\Echarts.js" />
+    <Content Include="Scripts\editor.js" />
     <Content Include="Scripts\front.js" />
     <Content Include="Content\style.default.css" />
     <Content Include="favicon.ico" />

@@ -80,7 +80,7 @@
                         <a href="#">当前用户：<span class="badge" style="font-size:medium">@tea.TeacherName</span></a>
                     </li>
                     <li>
-                        <a href="~/Home/LoginTeacher">
+                        <a href="~/Home/LoginTeacher"onclick="return confirm('你确定要退出吗？')">
                             <span class="glyphicon glyphicon-lock"></span>退出登录
                         </a>
                     </li>
@@ -117,7 +117,7 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;班级管理
+                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;学生管理
                             </a>
                         </h4>
                     </div>
@@ -125,18 +125,18 @@
 
                         <div class="panel-body">
                             <a href="~/Teacher/StuInfo" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生信息
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查看学生信息
                             </a>
                         </div>
                         <div class="panel-body">
                             <a href="~/Teacher/AddStu" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生信息
+                                <span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;添加学生信息
                             </a>
                         </div>
 
                         <div class="panel-body">
                             <a href="~/Teacher/StuEdit" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;编辑学生信息
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;编辑学生信息
                             </a>
                         </div>
                         @*<div class="panel-body">
@@ -159,17 +159,17 @@
                     <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             <a href="~/Teacher/Course" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加课程
+                                <span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;添加课程
                             </a>
                         </div>
                         <div class="panel-body">
                             <a href="~/Course/Index" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看课程
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查看课程
                             </a>
                         </div>
                         <div class="panel-body">
                             <a href="" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改课程
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;修改课程
                             </a>
                         </div>
                     </div>
@@ -186,17 +186,17 @@
             <div id="collapseThree" class="panel-collapse collapse">
                 <div class="panel-body">
                     <a href="~/Student/AddStuGrade" style="text-decoration:none">
-                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;添加学生成绩
+                        <span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;添加学生成绩
                     </a>
                 </div>
                 <div class="panel-body">
                     <a href="~/Student/Index" style="text-decoration:none">
-                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看学生成绩
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查看学生成绩
                     </a>
                 </div>
                 <div class="panel-body">
                     <a href="~/Student/EditStuGrade" style="text-decoration:none">
-                        <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改学生成绩
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;修改学生成绩
                     </a>
                 </div>
             </div>
@@ -214,12 +214,12 @@
                     <div id="collapseFour" class="panel-collapse collapse">
                         <div class="panel-body">
                             <a href="~/Teacher/AddInfo" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;发布通知
+                                <span class="glyphicon glyphicon-plus"></span> &nbsp;&nbsp;发布通知
                             </a>
                         </div>
                         <div class="panel-body">
                             <a href="~/Teacher/NewsInfo" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;查看通知
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;查看通知
                             </a>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseFive" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-stats"></span>&nbsp;个人中心
+                                <span class="glyphicon glyphicon-home"></span>&nbsp;个人中心
                             </a>
                         </h4>
                     </div>
@@ -237,12 +237,12 @@
                     <div id="collapseFive" class="panel-collapse collapse">
                         <div class="panel-body">
                             <a href="~/Teacher/EditPwd" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;修改密码
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;修改密码
                             </a>
                         </div>
                         <div class="panel-body">
-                            <a href="~/Home/LoginTeacher" style="text-decoration:none">
-                                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;退出登录
+                            <a href="~/Home/LoginTeacher" style="text-decoration:none" onclick="return confirm('你确定要退出吗？')">
+                                <span class="glyphicon glyphicon-arrow-left"></span> &nbsp;&nbsp;退出登录
                             </a>
                         </div>
                     </div>
