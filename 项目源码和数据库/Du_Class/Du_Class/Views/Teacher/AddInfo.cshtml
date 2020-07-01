@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "AddInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models
+@model Teacher
+@{
+
+    Teacher tea = Session["Teacher"] as Teacher;
+}
+<ul class="breadcrumb">
+    <li><a href="#">公告管理</a></li>
+    <li class="active">发布通知</li>
+</ul>
+
+
+<h2>新增发布</h2>
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+<form action="/Teacher/AddInfo" method="post">
+    <div class="col-lg-12 form-inline">
+        <label>发布人：</label><span>@tea.TeacherName</span>
+        </div>
+    <div class="col-lg-12 form-inline">
+        <label>标题：</label>
+        <input type="text" name="Title" class="form-control" />
+        <input type="hidden" name="TeacherID" value="@tea.TeacherID" class="form-control" />
+    </div>
+        <div class="col-lg-12 form-inline">
+            
+            <textarea name="News_content"></textarea>
+
+            <br />
+            <input type="submit" class="btn btn-success" value="发布" />
+        </div>
+
+</form>
+<script>
+    CKEDITOR.replace('News_content');  
+</script>

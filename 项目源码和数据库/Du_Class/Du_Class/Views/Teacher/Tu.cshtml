@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Tu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Du_Class.Models;
+@model List<Student>
+
+@{
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    int d = 0;
+    int e = 0;
+    int num1 = 0;
+    int num2 = 0;
+}
+
+<ul class="breadcrumb">
+    <li><a href="#">班级管理</a></li>
+    <li class="active">查看学生信息</li>
+</ul>
+
+@*<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>*@
+<script src="~/Scripts/editor.js"></script>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 600px;height:400px;">
+</div>
+<div id="main1" style="width: 600px;height:400px; float:right;margin-top:-390px">
+</div>
+
+<span style="display:none">
+    @foreach (var item in Model)
+    {
+        if (item.NativePlace == "湖南长沙")
+        {
+            @(a++)
+        }
+        else if (item.NativePlace == "湖南永州")
+        {
+            @(b++)
+        }
+        else if (item.NativePlace == "湖南衡阳")
+        {
+            @(c++)
+        }
+        else if (item.NativePlace == "湖南郴州")
+        {
+            @(d++)
+        }
+        else
+        {
+            @(e++)
+        }
+    }
+</span>
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.setOption({
+
+        title: {
+            text: '根据地区分类信息',
+
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['湖南长沙','湖南永州','湖南衡阳','湖南郴州','其它']
+        },
+        series: [
+            {
+                name: '地区',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                    { value: @a, name: '湖南长沙' },
+                    { value: @b, name: '湖南永州' },
+                    { value: @c, name: '湖南衡阳' },
+                    { value: @d, name: '湖南郴州' },
+                    { value: @e, name: '其它' },
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    })
+</script>
+
+
+<span style="display:none">
+    @foreach (var item in Model)
+    {
+        if (item.Stu_Sex == "0")
+        {
+            @(num1++)
+        }
+        else
+        {
+            @(num2++)
+        }
+
+    }
+</span>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main1'));
+    myChart.setOption({
+
+        title: {
+            text: '根据性别分类信息',
+
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['男','女']
+        },
+        series: [
+            {
+                name: '民族',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                    { value: @num1, name: '男' },
+                    { value: @num2, name: '女' },
+
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    })
+</script>
+
+
+
+<div class="form-group col-lg-12">
+    <a href="javascript:history.go(-1)" class="btn btn-info">返回</a>
+
+</div>

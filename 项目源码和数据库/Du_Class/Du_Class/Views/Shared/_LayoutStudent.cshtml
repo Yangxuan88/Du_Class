@@ -1,0 +1,86 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/style.default.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="page login-page">
+        <div class="container d-flex align-items-center">
+            <div class="form-holder has-shadow">
+                <div class="row">
+                    <!-- Logo & Information Panel-->
+                    <div class="col-lg-6">
+                        <div class="info d-flex align-items-center">
+                            <div class="content">
+                                <div class="logo">
+                                    <h1>欢迎登录</h1>
+                                </div>
+                                <h2>都可班级管理系统</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Panel    -->
+                    @*<div class="col-lg-6 bg-white">
+                            <div class="form d-flex align-items-center">
+                                <div class="content">
+                                    <form method="post" action="LoginTeacher" class="form-validate" id="loginFrom">
+                                        <div class="form-group">
+                                            <input id="login-username" type="text" name="TeacherName" required data-msg="请输入用户名" placeholder="用户名" class="input-material">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="login-password" type="password" name="passWord" required data-msg="请输入密码" placeholder="密码" class="input-material">
+                                        </div>
+
+                                        <div class="input-group col-lg-offset-2">
+                                                <input type="text" placeholder="请输入验证码" id="ValidateCode" name="ValidateCode" style="width:64%;margin-right:10px" class="input-material" />
+                                                <img src="~/Code/code.ashx?id=1" alt="看不清,换一张" style="width:100px; height: 36px;" onclick="this.src=this.src+1" />
+                                            </div>
+                                        <div class="form-group">
+                                            <div class="code">
+                                                <input type="text" value="" id="code" placeholder="请输入验证码（不区分大小写）" name="ValidateCode" class="input-material" style="width:64%;margin-right:10px" />
+                                                <canvas id="canvas" width="100" height="43"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col-lg-offset-2">
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button id="login" type="submit" class="btn btn-primary" style="width:100px">登录</button>
+                                            <input type="submit" value=" 登录 " class="btn btn-primary" id="login" style="width:100px" />
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="">忘记密码</a>
+                                        </div>
+                                    </form>
+
+                                    <span style="color:red">@ViewBag.Error </span>
+                                    <span style="color:red" id="error1"> </span>
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="col-lg-6 bg-white">
+                        @RenderBody()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

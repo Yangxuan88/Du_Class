@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "EditStuGrade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models;
+@model List<Student>
+
+
+
+@{
+
+    int code = 1;
+}
+<ul class="breadcrumb">
+    <li><a href="#">成绩管理</a></li>
+    <li class="active">修改学生成绩</li>
+</ul>
+<div class="col-lg-9">
+
+</div>
+<div class="col-lg-3">
+    <form action="/Student/EditStuGrade" method="post" class="form-inline">
+        <label for="Name"> 姓名:</label>
+        <input type="text" name="Name" id="userName" value="@ViewBag.Name" class="form-control" placeholder="请入姓名模糊查询" />
+        <input type="submit" value="查询" class="btn btn-success" />
+    </form>
+
+</div>
+<table class="table table-hover table-bordered" data-spy="scroll" data-target=".navbar" data-offset="50">
+    <thead>
+        <tr class="active">
+            <td>编号</td>
+            <td>班级</td>
+            <td>姓名</td>
+            <td>学号</td>
+            <td>性别</td>
+
+            @foreach (var item in ViewBag.course as List<Course>)
+            {
+                <td>@item.CourseName</td>
+            }
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="warning">
+                <td>@(code++)</td>
+                <td>@item.Class.ClassName</td>
+                <td>@item.Stu_Name</td>
+                <td>@item.Stu_Namber</td>
+                 @if (item.Stu_Sex == "0")
+                 {
+                     <td>男</td>
+                 }
+                 else
+                 {
+                     <td>女</td>
+                 }
+
+                @foreach (var item1 in item.Grade)
+                {
+                    <td>@item1.Stu_Score</td>
+                }
+            <td>
+                <a href="~/Student/DeleteGrade?id=@item.StudentID" class="btn btn-danger">删除</a>
+                <a href="~/Student/EditGrade?id=@item.StudentID" class="btn btn-info">修改</a>
+            </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 2, 4, 5, 10, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(@ViewBag.pageCount))
+                {
+                    <option value="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (ViewBag.pageIndex < ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Student/EditStuGrade?name=@ViewBag.Name&pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

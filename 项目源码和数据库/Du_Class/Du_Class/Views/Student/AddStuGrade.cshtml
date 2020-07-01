@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = "AddStuGrade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models;
+@model List<Grade>
+@{
+    int code = 1;
+}
+@{
+    List<Student> stu = ViewBag.stu as List<Student>;
+    List<Course> cou = ViewBag.course as List<Course>;
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<ul class="breadcrumb">
+
+    <li><a href="#">成绩管理</a></li>
+    <li class="active">添加学生成绩</li>
+</ul>
+
+<style type="text/css">
+    #content {
+        width: 1000px;
+        height: 200px;
+        border: 3px solid gainsboro;
+        margin-bottom: 40px;
+    }
+
+    .top {
+        height: 40px;
+        background-color: steelblue;
+    }
+
+    input {
+        margin: 20px;
+    }
+
+    select {
+        margin: 20px;
+    }
+    .error{
+        color:red;
+    }
+</style>
+<div id="content">
+    <div class="top">
+        <span style="color: white;">|添加成绩</span>
+    </div>
+    <div class="down">
+        <form class="form-horizontal" action="/Student/AddStuGrade" method="post" id="form1">
+            @*<div class="col-lg-6 form-inline">
+            <label>学号：</label>
+            <input type="text" name="ClassName" value="@Model" />
+        </div>*@
+            <div class="col-lg-6 form-inline">
+                <label>学生姓名：</label>
+                <select class="form-control" name="StudentID">
+                    @foreach (var item in stu)
+                    {
+                        <option name="Stu_Name" value="@item.StudentID">@item.Stu_Name</option>
+                    }
+
+                </select>
+            </div>
+
+            <div class="col-lg-6  form-inline">
+                <label>课程名称：</label>
+                <select class="form-control" name="CourseID">
+                    @foreach (var item in cou)
+                    {
+                        <option name="CourseName" value="@item.CourseID">@item.CourseName</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-lg-6  form-inline">
+                <label for="Stu_Score">考试成绩：</label> <input type="text" class="form-control" name="Stu_Score" />
+
+            </div>
+            <div class="col-lg-6  form-inline"> <input type="submit" value="添加成绩" class="btn btn-info">  </div>
+        
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="active">
+            <td>编号</td>
+            <td>学号</td>
+            <td>姓名</td>
+            @foreach (var item in cou)
+            {
+                <td>@item.CourseName</td>
+            }
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in stu)
+        {
+        <tr class="warning">
+            <td>@(code++)</td>
+
+            <td>@item.Stu_Namber</td>
+            <td>@item.Stu_Name</td>
+
+            @foreach (var item2 in item.Grade)
+            {
+                            
+                    <td>@item2.Stu_Score</td>
+            }
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+    $("#form1").validate({
+        rules: {
+            Stu_Score: { required: true, min: 0, max: 100 },
+        },
+        messages: {
+            Stu_Score: { required: "成绩必填", min: "请输入0-100的分数", max: "请输入0-100的分数" },
+        }
+    })
+</script>
+
+
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+                int[] count = new[] { 2, 4, 5, 10, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option value="/Student/AddStuGrade?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Student/AddStuGrade?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Student/AddStuGrade?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/AddStuGrade?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (ViewBag.pageIndex < ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Student/AddStuGrade?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Student/AddStuGrade?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

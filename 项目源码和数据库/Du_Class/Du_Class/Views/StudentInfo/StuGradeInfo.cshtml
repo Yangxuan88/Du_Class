@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "StuGradeInfo";
+    Layout = "~/Views/Shared/_LayoutStuentInfo.cshtml";
+}
+@using Du_Class.Models;
+@model Student
+@{
+    double? sum = 0;
+}
+
+@{
+    double? a = 0;
+    double? b = 0;
+    double? c = 0;
+    List<Grade> grade = ViewBag.grade;
+}
+@*<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>*@
+    <script src="~/Scripts/editor.js"></script>
+<ul class="breadcrumb">
+    <li><a href="#">学生成绩</a></li>
+    <li class="active">查看成绩</li>
+</ul>
+
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="success">
+            <td>学号</td>
+            <td>姓名</td>
+            @foreach (var item in Model.Class.Course)
+            {
+                <td>@item.CourseName</td>
+
+            }
+            <th>总分</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="warning">
+            <td>@Model.Stu_Namber</td>
+            <td>@Model.Stu_Name</td>
+            @foreach (var item in ViewBag.grade as List<Grade>)
+            {
+                <td>@item.Stu_Score </td>
+                <td style="display:none">@(sum = sum + item.Stu_Score);</td>
+            }
+            <td>@(sum)</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<br />
+
+<span style="display:none">
+    @for (int i = 0; i < grade.Count; i++)
+    {
+        @(a = grade[0].Stu_Score);
+        @(b = grade[1].Stu_Score);
+        @(c = grade[2].Stu_Score);
+    }
+</span>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+            // 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+            // 如果不指定 dimensions，也可以通过指定 series.encode 完成映射，参见后文。
+            dimensions: ['product', '大学计算机基础', '软件工程', '大学计算机基础(二)'],
+            source: [
+                @*{ product: '各科成绩分数', '大学计算机基础': @a, '软件工程': @b, '大学计算机基础(二)': @c },*@
+                { product: '大学计算机基础', '大学计算机基础':@a },
+                { product: '软件工程', '软件工程':@b },
+                { product: '大学计算机基础(二)', '大学计算机基础(二)': @c }
+            ]
+        },
+        xAxis: { type: 'category' },
+        yAxis: {},
+        series: [
+            { type: 'bar' },
+            { type: 'bar' },
+            { type: 'bar' }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+<div class="form-group col-lg-12">
+    <a href="javascript:history.go(-1)" class="btn btn-info">返回</a>
+
+</div>

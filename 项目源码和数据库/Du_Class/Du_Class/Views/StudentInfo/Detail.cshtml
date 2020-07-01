@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutStuentInfo.cshtml";
+}
+@using Du_Class.Models;
+@model Student
+<h2>个人信息</h2>
+
+<table class="table table-condensed table-bordered" width="200">
+    <tr class="warning">
+        <td>学号</td>
+        <td>@Model.Stu_Namber</td>
+    </tr>
+    <tr>
+        <td>姓名</td>
+        <td>@Model.Stu_Name</td>
+    </tr>
+    <tr class="warning">
+        <td>班级</td>
+        <td>@Model.Class.ClassName</td>
+    <tr>
+        <td>性别</td>
+        
+        @if(Model.Stu_Sex=="0")
+        {
+            <td>男</td>
+        }
+        else
+        {
+            <td>女</td>
+        }
+    </tr>
+
+
+    <tr class="warning">
+        <td>身份证</td>
+        <td>@Model.IDCard</td>
+    </tr>
+    <tr>
+        <td>民族</td>
+        @*<td>@Model.Nation</td>*@
+        @if (Model.Nation == "0")
+        {
+            <td>汉族</td>
+        }
+        else if (Model.Nation == "1")
+        {
+            <td>壮族</td>
+        }
+        else
+        {
+            <td>维吾尔族</td>
+        }
+    </tr>
+    <tr class="warning">
+        <td>籍贯</td>
+        <td>@Model.NativePlace</td>
+    </tr>
+    <tr>
+        <td>政治面貌</td>
+        @*<td>@Model.PoliticsStatus</td>*@
+        @if (Model.PoliticsStatus == "0")
+        {
+            <td>共青团员</td>
+        }
+        else if(Model.PoliticsStatus=="1")
+        {
+            <td>共产党员</td>
+        }
+        else
+        {
+            <td>其它</td>
+        }
+    </tr>
+    <tr class="warning">
+        <td>手机号</td>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <td>入学年份</td>
+        <td>@Model.EnrollmentYear 年</td>
+    </tr>
+</table>

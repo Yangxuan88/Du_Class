@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "NewsContent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models;
+@model News
+@{
+    Teacher tea = Session["Teacher"] as Teacher;
+}
+
+<div class="col-lg-12 form-inline">
+    <h4>@Model.Title</h4>
+</div>
+<div class="col-lg-12 form-inline">
+    <label>发布人：</label><span>@tea.TeacherName</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>发布时间：</label><span>@Model.Publish_time</span>
+</div>
+<textarea name="News_content" id="content2" style="display:none">
+      @Model.News_content
+</textarea>
+
+<div id="div1">
+
+</div>
+
+
+<a href="javascript:history.go(-1)" class="btn btn-toolbar">返回</a>
+
+@section scripts{
+    <script type="text/javascript">
+        //CKEDITOR.replace('News_content');
+        $("#div1").html($("#content2").text());
+    </script>
+}

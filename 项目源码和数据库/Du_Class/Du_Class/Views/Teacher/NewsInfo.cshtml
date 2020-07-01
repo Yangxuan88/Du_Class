@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "NewsInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Du_Class.Models
+@model List<News>
+@{
+    
+    int num = 1;
+}
+<ul class="breadcrumb">
+    <li><a href="#">公告管理</a></li>
+    <li class="active">发布通知</li>
+</ul>
+
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#home" data-toggle="tab">
+            查看信息
+        </a>
+    </li>
+</ul>
+
+<div class="col-lg-9"></div>
+
+<div class="col-lg-3">
+    <form action="/Teacher/NewsInfo" method="post" class="form-inline">
+        <label for="title">姓名: </label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="请入标题模糊查询" />
+        <input type="submit" value="查询" class="btn btn-success" />
+    </form>
+</div>
+
+
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="home">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>标题</th>
+                    <th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(num++)</td>
+                        <td><a href="~/Teacher/NewsContent?id=@item.NewsID">@item.Title</a></td>
+                        <td>@item.Publish_time</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+<div classs="row">
+    <div class="col-lg-8">
+        <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+        <select onchange="window.location = this.value;">
+            @{
+
+                int[] count = new[] { 2, 5, 8, 12, 15 };
+            }
+            @foreach (var item in count)
+            {
+                if (item.Equals(ViewBag.pageCount))
+                {
+                    <option value="/Teacher/NewsInfo?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                }
+                else
+                {
+                    <option value="/Teacher/NewsInfo?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                }
+
+            }
+        </select>
+    </div>
+    <div class="col-lg-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Teacher/NewsInfo?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a>
+                </li>
+                @if (ViewBag.pageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Teacher/NewsInfo?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">上一页</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" href="#">@ViewBag.pageIndex</a>
+                </li>
+
+                @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Teacher/NewsInfo?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">下一页</a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/Teacher/NewsInfo?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<a href="~/Teacher/AddInfo" class="btn btn-primary">发布信息</a>
+<script>
+    $(function () {
+        $('#myTab li:eq(1) a').tab('show');
+    });
+</script>
